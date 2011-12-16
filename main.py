@@ -2,10 +2,11 @@
 
 from data import *
 from collections import Counter
+import sys
 
 class BoardPosition:
     """A single board position.
-    Position format: ( [ a1, b1, ... , h1, a2, ... , h8 ],           # Piece placement or None,
+    Position format: ( [ 01, 02, ... , 63],                          # Piece placement or None,
                        'w' | 'b',                                    # Side to move.
                        [ 'K', 'Q', 'k', 'q' ],                       # Castling rights or None.
                        int,                                          # en passant square or None.
@@ -46,30 +47,58 @@ class BoardRelations:
         return self.pieceplacement[square]
     
     def MapRanks(self):
-        """Returns tuplet with lists for each of a Rank."""
-        Rank1, Rank2, Rank3, Rank4, Rank5, Rank6, Rank7, Rank8 = ([], [], [], [], [], [], [], [])
-        for i in rank1pos:
-            Rank1.append(self.pieceplacement[i])
-        for i in rank2pos:
-            Rank2.append(self.pieceplacement[i])
-        for i in rank3pos:
-            Rank3.append(self.pieceplacement[i])
-        for i in rank4pos:
-            Rank4.append(self.pieceplacement[i])
-        for i in rank5pos:
-            Rank5.append(self.pieceplacement[i])
-        for i in rank6pos:
-            Rank6.append(self.pieceplacement[i])
-        for i in rank7pos:
-            Rank7.append(self.pieceplacement[i])
-        for i in rank8pos:
-            Rank8.append(self.pieceplacement[i])
-                        
-        return (Rank1, Rank2, Rank3, Rank4, Rank5, Rank6, Rank7, Rank8)
+        """Returns List of lists for each of Rank."""
+        AllRanks = []
+        for rank in rankpos:
+            AllRanks.append(map(self.MapPieces, rank))
+        return AllRanks
     
     def MapFiles(self):
-        """Returns tuplet with the lists for each File."""
+        """Returns List with the lists for each File."""
+        AllFiles = []
+        for file in filepos:
+            AllFiles.append(map(self.MapPieces, file))
+        return AllFiles
+    
+    def MapDiagonal(self):
+        """Returns List with lists of Diagonals."""
+        AllDiagonals = []
+        for diag in diagpos:
+            AllDiagonals.append(map(self.MapPieces, diag))
+    
+    def ShareLine(self, square1, square2):
+        """Tests if two squares share a rank, file or diagonal.
+        Returns a List of three True/False: [rank,file,diag]
+        """
+        return [True,True,True]
+    
+    def TestAdjacent(self, square1, square2):
+        """Tests if two squares are adjacent.
+        Returns True/False.
+        """
         return True
+    
+    def CalcDistance(self, square1, square2):
+        """Calculates distance between two squares.
+        Needs a definion! 
+        Returns int"""
+        return 0
+    
+    def ClearLine(self, square1, square2):
+        """Tests if two squares on a line have any pieces between them.
+        Returns True/False.
+        """
+        return True
+
+    def TestSameColour(self, square1, square2):
+        """Tests if two squares are the same colour.
+        Returns True/False.
+        """
+        return True
+
+
+
+
 
 emptytest = BoardPosition(emptyBoard)
 starttest = BoardPosition(startBoard)
@@ -77,9 +106,22 @@ rooktest = BoardPosition(startwithoutrooks)
 
 relation1 = BoardRelations(starttest.pieceplacement)
 
-print relation1.MapPieces(06)
-print relation1.MapRanks()[7]
+#print relation1.MapPieces(06)
 
+def testrelations():
+    print relation1.MapRanks()
+    print
+    for i in xrange(0, len(rankpos)):
+        print relation1.MapRanks()[i]
+    print
+    for i in xrange(0, len(filepos)):
+        print relation1.MapFiles()[i]
+    print
+    for i in xrange(0,len(diagpos)):
+        print diagpos[i]
+            
+    
+testrelations()
 #print emptytest.MaterialCount()
 #print starttest.MaterialCount()
 #print rooktest.MaterialCount()
