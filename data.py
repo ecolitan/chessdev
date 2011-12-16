@@ -13,14 +13,23 @@ a3 b3 c3 d3 e3 f3 g3 h3
 a2 b2 c2 d2 e2 f2 g2 h2
 a1 b1 c1 d1 h1 f1 g1 h1
 
+56 57 58 59 60 61 62 63
+48 49 50 51 52 53 54 55
+40 41 42 43 44 45 46 47
+32 33 34 35 36 37 38 39
+24 25 26 27 28 29 30 31
+16 17 18 19 20 21 22 23
+08 09 10 11 12 13 14 15
+00 01 02 03 04 05 06 07
 
-57 58 59 60 61 62 63 64
-49 50 51 52 53 54 55 56
-41 42 43 44 45 46 47 48
-33 34 35 36 37 38 39 40
-25 26 27 28 29 30 31 32
-17 18 19 20 21 22 23 24
-09 10 11 12 13 14 15 16
-01 02 03 04 05 06 07 08
+The numbers correspond directly to the position in the pieceplacement List, ie. list[25] = b4
 """
 
+rank1pos = range(0,8)
+rank2pos = range(8,16)
+rank3pos = range(16,24)
+rank4pos = range(24,32)
+rank5pos = range(32,40)
+rank6pos = range(40,48)
+rank7pos = range(48,56)
+rank8pos = range(56,64)
