@@ -47,42 +47,64 @@ class BoardRelations:
         return self.pieceplacement[square]
     
     def MapRanks(self):
-        """Returns List of lists for each of Rank."""
+        """Returns List of lists for pieces on each Rank."""
         AllRanks = []
         for rank in rankpos:
             AllRanks.append(map(self.MapPieces, rank))
         return AllRanks
     
     def MapFiles(self):
-        """Returns List with the lists for each File."""
+        """Returns List of lists for pieces on each File."""
         AllFiles = []
         for file in filepos:
             AllFiles.append(map(self.MapPieces, file))
         return AllFiles
     
     def MapDiagonal(self):
-        """Returns List with lists of Diagonals."""
+        """Returns List with lists for pieces on each Diagonal."""
         AllDiagonals = []
         for diag in diagpos:
             AllDiagonals.append(map(self.MapPieces, diag))
     
-    def ShareLine(self, square1, square2):
-        """Tests if two squares share a rank, file or diagonal.
-        Returns a List of three True/False: [rank,file,diag]
-        """
-        return [True,True,True]
-    
-    def TestAdjacent(self, square1, square2):
-        """Tests if two squares are adjacent.
+    def ShareRank(self, square1, square2):
+        """Tests if two squares share a rank.
         Returns True/False.
         """
-        return True
+        for rank in rankpos:
+            if square1 in rank and square2 in rank:
+                return True
+        return False
+        
+    def ShareFile(self, square1, square2):
+        """Tests if two squares share a file.
+        Returns True/False.
+        """
+        for file in filepos:
+            if (square1 and square2) in file:
+                return True
+        return False
+    
+    def ShareDiag(self, square1, square2):
+        """Tests if two squares share a diagonal.
+        Returns True/False.
+        """
+        for diag in diagpos:
+            if (square1 and square2) in diag:
+                return True
+        return False
     
     def CalcDistance(self, square1, square2):
         """Calculates distance between two squares.
         Needs a definion! 
         Returns int"""
         return 0
+        
+    def TestAdjacent(self, square1, square2):
+        """Tests if two squares are adjacent.
+        Returns True/False.
+        """
+        # Adjacent is simply distance = 1
+        return True
     
     def ClearLine(self, square1, square2):
         """Tests if two squares on a line have any pieces between them.
@@ -100,28 +122,43 @@ class BoardRelations:
 
 
 
-emptytest = BoardPosition(emptyBoard)
-starttest = BoardPosition(startBoard)
-rooktest = BoardPosition(startwithoutrooks)
 
-relation1 = BoardRelations(starttest.pieceplacement)
+# Some testing, still need to learn how to test correctly.
 
-#print relation1.MapPieces(06)
-
-def testrelations():
-    print relation1.MapRanks()
-    print
-    for i in xrange(0, len(rankpos)):
-        print relation1.MapRanks()[i]
-    print
-    for i in xrange(0, len(filepos)):
-        print relation1.MapFiles()[i]
-    print
-    for i in xrange(0,len(diagpos)):
-        print diagpos[i]
-            
+def testBoardPosition():
+    """Tests for BoardPosition Objects."""
+    emptytest = BoardPosition(emptyBoard)
+    starttest = BoardPosition(startBoard)
+    rooktest = BoardPosition(startBoardnorooks)
     
-testrelations()
-#print emptytest.MaterialCount()
-#print starttest.MaterialCount()
-#print rooktest.MaterialCount()
+    print emptytest.MaterialCount()
+    print starttest.MaterialCount()
+    print rooktest.MaterialCount()
+    return True
+    
+def testBoardRelations():
+    """Tests for BoardRelations Objects."""
+    emptytest = BoardRelations(emptyBoard[0])
+    starttest = BoardRelations(startBoard[0])
+    rooktest = BoardRelations(startBoardnorooks[0])
+
+    #print starttest.MapPieces(06)
+    
+    #print starttest.MapRanks()
+    #print
+    #for i in xrange(0, len(rankpos)):
+        #print starttest.MapRanks()[i]
+    #print
+    #for i in xrange(0, len(filepos)):
+        #print starttest.MapFiles()[i]
+    #print
+    #for i in xrange(0,len(diagpos)):
+        #print diagpos[i]
+    
+    print "  test if 8 15 share rank: True"
+    print starttest.ShareRank(8,15)     #true
+    print "  test 17 35 share rank: False"
+    print starttest.ShareRank(17,35)    #false
+    
+#testBoardPosition()
+testBoardRelations()
