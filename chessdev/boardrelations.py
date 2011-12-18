@@ -61,9 +61,20 @@ class BoardRelations:
                 return True
         return False
     
+    def RankSeparation(self, square1, square2):
+        """Caclulates rank separation between two squares.
+        If both squares on same rank, RankSeparation(n,m)=0
+        Returns int"""
+        return 0
+    
+    def FileSeparation(self, square1, square2):
+        """Calculates file separation between two squares.
+        Returns int"""
+        return 0
+        
     def CalcDistance(self, square1, square2):
         """Calculates distance between two squares.
-        Needs a definion! 
+        Distance is the greater from RankSeparation and FileSeparation. 
         Returns int"""
         return 0
         

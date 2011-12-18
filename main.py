@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 
 import sys
-#from chessdev.data.data import *
-#from chessdev.boardposition import BoardPosition
-#from chessdev.boardrelations import BoardRelations
-from test.quicktest import *
+from test import *
 
 def main():
     """Documentation string here."""

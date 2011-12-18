@@ -3,6 +3,10 @@ relationships between squares:
     calculate distance between two squares
     calculate possible piece moves from each square
     
+redefine BoardRelations.ShareRank(), ShareFile() and ShareDiag in terms of RankSeparation and FileSeparation.
+ShareDiag is rankseparation == fileseparation != 0
+
+
 Exception handling
 
 Test suite
