@@ -93,6 +93,9 @@ class BoardRelations:
 
     def TestSameColour(self, square1, square2):
         """Tests if two squares are the same colour.
+        if (rankseparation + filesepatation)/2 has 0 remainder, the squares are the same colour
         Returns True/False.
         """
-        return True
+        if (self.RankSeparation(square1, square2) + self.FileSeparation(square1, square2)) % 2 == 0:
+            return True
+        return False
