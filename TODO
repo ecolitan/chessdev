@@ -1,0 +1,14 @@
+relationships between squares:
+    are two squares on the same rank or same file?
+    calculate distance between two squares
+    calculate possible piece moves from each square
+    
+Exception handling
+
+Test suite
+
+Correct import structure.
+
+Add Licencing info.
+
+1. Give a position and print a list of legal moves.
