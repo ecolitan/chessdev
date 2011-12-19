@@ -6,6 +6,10 @@ relationships between squares:
 redefine BoardRelations.ShareRank(), ShareFile() and ShareDiag in terms of RankSeparation and FileSeparation.
 ShareDiag is rankseparation == fileseparation != 0
 
+Split data into examples and datasets.
+Dictionary datasets for ranks and files.
+
+New file for code examples.
 
 Exception handling
 
