@@ -1,23 +1,9 @@
 relationships between squares:
-    are two squares on the same rank or same file?
-    calculate distance between two squares
     calculate possible piece moves from each square
-    
-redefine BoardRelations.ShareRank(), ShareFile() and ShareDiag in terms of RankSeparation and FileSeparation.
-ShareDiag is rankseparation == fileseparation != 0
-
-Split data into examples and datasets.
-Dictionary datasets for ranks and files.
-
-New file for code examples.
 
 Exception handling!!
     SpanError('SameSquare')
 
 Test suite
-
-Correct import structure.
-
-Add Licencing info.
 
 1. Give a position and print a list of legal moves.
