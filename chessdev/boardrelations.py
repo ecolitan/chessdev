@@ -34,61 +34,87 @@ class BoardRelations:
         for diag in diagpos:
             AllDiagonals.append(map(self.MapPieces, diag))
     
-    def ShareRank(self, square1, square2):
-        """Tests if two squares share a rank.
-        Returns True/False.
-        """
-        for rank in rankpos:
-            if square1 in rank and square2 in rank:
-                return True
-        return False
-        
-    def ShareFile(self, square1, square2):
-        """Tests if two squares share a file.
-        Returns True/False.
-        """
-        for file in filepos:
-            if (square1 and square2) in file:
-                return True
-        return False
-    
     def ShareDiag(self, square1, square2):
         """Tests if two squares share a diagonal.
         Returns True/False.
         """
-        for diag in diagpos:
-            if (square1 and square2) in diag:
-                return True
+        if (diagdict[square1] == diagdict[square2]):
+            return True
         return False
-    
+        
     def RankSeparation(self, square1, square2):
         """Caclulates rank separation between two squares.
         If both squares on same rank, RankSeparation(n,m)=0
         Returns int"""
-        return 0
-    
+        return abs(rankdict[square1] - rankdict[square2])
+        
     def FileSeparation(self, square1, square2):
         """Calculates file separation between two squares.
         Returns int"""
-        return 0
+        return abs(filedict[square1] - filedict[square2])
         
     def CalcDistance(self, square1, square2):
         """Calculates distance between two squares.
         Distance is the greater from RankSeparation and FileSeparation. 
         Returns int"""
-        return 0
+        if (abs(filedict[square1] - filedict[square2]) >= abs(rankdict[square1] - rankdict[square2])):
+            return abs(filedict[square1] - filedict[square2])
+        else:
+            return abs(rankdict[square1] - rankdict[square2])
         
     def TestAdjacent(self, square1, square2):
         """Tests if two squares are adjacent.
         Returns True/False.
         """
-        # Adjacent is simply distance = 1
-        return True
+        if (self.CalcDistance(square1, square2) == 1):
+            return True
+        return False
     
     def ClearLine(self, square1, square2):
         """Tests if two squares on a line have any pieces between them.
         Returns True/False.
         """
+        
+        if square1 == square2:
+            raise RelationError('SameSquare')
+            return False
+            
+        if self.TestAdjacent(square1, square2):
+            return True
+            
+        if square1 > square2:
+            bigger == square1
+            smaller == square2
+        else:
+            bigger == square2
+            smaller == square1
+            
+        if self.RankSeparation(square1, square2) == 0:
+            for rank in rankpos:
+                if square1 in rank:
+                    smalllist = rank[smaller+1:bigger]
+            
+        if self.FileSeparation(square1, square2) == 0:
+            for file in filepos:
+                if square1 in file:
+                    smalllist = file[smaller+1:bigger]
+            
+        if self.ShareDiag(square1, square2):
+            for diag in diagpos:
+                if square1 in diag:
+                    smalllist = diag[smaller+1:bigger]
+        
+        for i in smalllist:
+            if self.MapPieces(i):
+                return False
+        
+        if not (self.TestAdjacent(square1, square2) or
+                self.RankSeparation(square1, square2) == 0 or
+                self.FileSeparation(square1, square2) == 0 or
+                self.ShareDiag(square1, square2)):
+                    raise RelationError('NotSameLine')
+                    return False
+        
         return True
 
     def TestSameColour(self, square1, square2):
