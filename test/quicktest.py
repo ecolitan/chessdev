@@ -1,7 +1,7 @@
 from chessdev.boardposition import BoardPosition
 from chessdev.boardrelations import BoardRelations
 from chessdev.data.data import *
-
+from chessdev.data.examples import *
 
 def quicktest():
     def testBoardPosition():
