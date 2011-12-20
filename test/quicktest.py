@@ -5,16 +5,7 @@ from chessdev.data.data import *
 from chessdev.data.examples import *
 
 def quicktest():
-    def testBoardPosition():
-        """Tests for BoardPosition Objects."""
-        emptytest = BoardPosition(emptyBoard)
-        starttest = BoardPosition(startBoard)
-        rooktest = BoardPosition(startBoardnorooks)
-        
-        #print emptytest.MaterialCount()
-        #print starttest.MaterialCount()
-        #print rooktest.MaterialCount()
-        return True
+
         
     def testBoardRelations():
         """Tests for BoardRelations Objects."""
@@ -35,5 +26,4 @@ def quicktest():
     print KingMoves(test2).kingsquare()
     print KingMoves(test3).kingsquare()
     
-    testBoardPosition()
     testBoardRelations()

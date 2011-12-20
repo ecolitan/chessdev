@@ -6,4 +6,9 @@ Exception handling!!
 
 Test suite
 
+IsCheck
+Is a square check?
+Is a square occupied by a piece of the same colour?
+
+
 1. Give a position and print a list of legal moves.
