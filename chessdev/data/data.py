@@ -4,6 +4,14 @@ testpos1 = (['R', 'N', 'B', None, 'K', 'B', 'N', 'R', 'P', 'P', 'P', 'P', 'P', '
 testpos2 = (['R', 'N', 'B', 'Q', None, 'B', 'N', 'R', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', None,  None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, 'K', None, None, None, None, 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'r',  'n',  'b',  'q',  'k',  'b',  'n',  'r'],'w',['K','Q','k','q'],None,0,0)
 testpos3 = (['R', 'N', 'B', 'Q', None, 'B', 'N', 'R', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', None,  None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'r',  'n',  'b',  'q',  'k',  'b',  'n',  'r'],'w',['K','Q','k','q'],None,0,0)
 testpos4 = (['R', 'N', 'B', 'Q', None, 'B', 'N', 'R', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', None,  None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'r',  'n',  'b',  'q',  None,  'b',  'n',  'r'],'w',['K','Q','k','q'],None,0,0)
+testpos5 = (['R', 'N', 'B', 'Q', None, 'B', 'N', 'R', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'K',  None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'r',  'n',  'b',  'q',  'k',  'b',  'n',  'r'],'w',['K','Q','k','q'],None,0,0)
+startBoardnorooks = ([None, 'N', 'B', 'Q', 'K', 'B', 'N', None, 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', None,  None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', None,  'n',  'b',  'q',  'k',  'b',  'n',  None],'w',['K','Q','k','q'],None,0,0)
+
+piecetypes = ['R', 'N', 'B', 'Q', 'K', 'P', 'r', 'n', 'b', 'q', 'k', 'p']
+
+whitepieces = ['R', 'N', 'B', 'Q', 'K', 'P']
+
+blackpieces = ['r', 'n', 'b', 'q', 'k', 'p']
 
 boardpos = [
     0, 1, 2, 3, 4, 5, 6, 7,

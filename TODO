@@ -12,3 +12,5 @@ Is a square occupied by a piece of the same colour?
 
 
 1. Give a position and print a list of legal moves.
+
+KingMoves.KingSquare may not return none. If king not found must tantrum.

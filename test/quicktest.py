@@ -11,10 +11,11 @@ def quicktest():
     test2 = BoardRelations(testpos2)         # king on e6 in check
     test3 = BoardRelations(testpos3)         # No white king
     test4 = BoardRelations(testpos4)         # No kings
+    test5 = BoardRelations(testpos5)         # King on a3
     
-    print KingMoves(starttest).kingsquare()
-    print KingMoves(test1).kingsquare()
-    print KingMoves(test2).kingsquare()
-    print KingMoves(test3).kingsquare()
+    for boardrelations_object in [starttest, test1, test2, test5]:
+        #test KingSquare method
+        print KingMoves(boardrelations_object).KingSquare()
+        #test PossibleSquares method
+        print KingMoves(boardrelations_object).PossibleSquares(KingMoves(boardrelations_object).KingSquare())
     
-
