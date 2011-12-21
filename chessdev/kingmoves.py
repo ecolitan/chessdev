@@ -12,15 +12,12 @@ class KingMoves:
         
     def KingSquare(self):
         """Returns the square of the king, for the side to move.
-        Returns int
+        Returns list
         """
-        
         if self.sidetomove == 'w':
-            for i in [kingsquare for kingsquare,x in enumerate(self.position.pieceplacement) if x == 'K']:
-                return i
+            return [piecesquare for piecesquare,x in enumerate(self.position.pieceplacement) if x == 'K']
         elif self.sidetomove == 'b':
-            for i in [kingsquare for kingsquare,x in enumerate(self.position.pieceplacement) if x == 'k']:
-                return i
+            return [piecesquare for piecesquare,x in enumerate(self.position.pieceplacement) if x == 'k']
         else:
             raise PositionError(self.position, 'CantFindKing')
             

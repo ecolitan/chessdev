@@ -1,6 +1,7 @@
 from chessdev.boardrelations import BoardRelations
 from chessdev.kingmoves import KingMoves
 from chessdev.rookmoves import RookMoves
+from chessdev.bishopmoves import BishopMoves
 from chessdev.data.data import *
 from chessdev.data.examples import *
 
@@ -22,8 +23,11 @@ def quicktest():
         #test KingSquare method
         print KingMoves(boardrelations_object).KingSquare()
         #test PossibleSquares method
-        print KingMoves(boardrelations_object).PossibleSquares(KingMoves(boardrelations_object).KingSquare())
+        print KingMoves(boardrelations_object).PossibleSquares(KingMoves(boardrelations_object).KingSquare()[0])
     
-    # Tests for RookMoves
-        print RookMoves(starttest).sidetomove
+        #Tests for RookMoves
+        print RookMoves(boardrelations_object).sidetomove
+        
+        #tests for bishopmoves
+        print BishopMoves(boardrelations_object).BishopSquare()
     
