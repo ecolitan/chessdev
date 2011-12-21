@@ -1,4 +1,5 @@
 from chessdev.data.data import *
+from chessdev.customexceptions import *
 
 class KingMoves:
     """Calculates legal King moves.
@@ -21,7 +22,7 @@ class KingMoves:
             for i in [kingsquare for kingsquare,x in enumerate(self.position.pieceplacement) if x == 'k']:
                 return i
         else:
-            raise PositionError('CantFindKing')
+            raise PositionError(self.position, 'CantFindKing')
             
     def PossibleSquares(self, square):
         """Returns a list of possible squares for the king to move to.

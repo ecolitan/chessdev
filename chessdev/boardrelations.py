@@ -1,5 +1,6 @@
 from collections import Counter
 from chessdev.data.data import *
+from chessdev.customexceptions import *
 
 class BoardRelations:
     """The relationships between the elements of a board position.
@@ -100,7 +101,7 @@ class BoardRelations:
         """
         
         if square1 == square2:
-            raise RelationError('SameSquare')
+            raise RelationError(square1, square2, 'SameSquare')
             return False
             
         if self.TestAdjacent(square1, square2):
@@ -136,7 +137,7 @@ class BoardRelations:
                 self.RankSeparation(square1, square2) == 0 or
                 self.FileSeparation(square1, square2) == 0 or
                 self.ShareDiag(square1, square2)):
-                    raise RelationError('NotSameLine')
+                    raise RelationError(square1, square2, 'NotSameLine')
                     return False
         
         return True
