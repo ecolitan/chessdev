@@ -1,4 +1,6 @@
 #code snippets I might use later.
+"""
+
 
 keys = [
 56, 57, 58, 59, 60, 61, 62, 63,
@@ -22,3 +24,16 @@ values = [
 
 dictionary = dict(zip(keys, values))
 print dictionary
+
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+"""

@@ -39,32 +39,20 @@ class BoardRelations:
         """
         return self.pieceplacement[square]
     
-    def MapRanks(self):
-        """Returns List of lists for pieces on each Rank."""
-        AllRanks = []
-        for rank in rankpos:
-            AllRanks.append(map(self.MapPieces, rank))
-        return AllRanks
-    
-    def MapFiles(self):
-        """Returns List of lists for pieces on each File."""
-        AllFiles = []
-        for file in filepos:
-            AllFiles.append(map(self.MapPieces, file))
-        return AllFiles
-    
-    def MapDiagonal(self):
-        """Returns List with lists for pieces on each Diagonal."""
-        AllDiagonals = []
-        for diag in diagpos:
-            AllDiagonals.append(map(self.MapPieces, diag))
+    def MapList(self, inlist):
+        """Returns List of with pieces for a given list."""
+        outlist = []
+        for square in inlist:
+            outlist.append(self.MapPieces(square))
+        return outlist
     
     def ShareDiag(self, square1, square2):
         """Tests if two squares share a diagonal.
         Returns True/False.
         """
-        if (diagdict[square1] == diagdict[square2]):
-            return True
+        for diagdict in alldiagdict:
+            if (diagdict[square1] == diagdict[square2]):
+                return True
         return False
         
     def RankSeparation(self, square1, square2):
@@ -108,11 +96,11 @@ class BoardRelations:
             return True
             
         if square1 > square2:
-            bigger == square1
-            smaller == square2
+            bigger = square1
+            smaller = square2
         else:
-            bigger == square2
-            smaller == square1
+            bigger = square2
+            smaller = square1
             
         if self.RankSeparation(square1, square2) == 0:
             for rank in rankpos:
@@ -125,9 +113,10 @@ class BoardRelations:
                     smalllist = file[smaller+1:bigger]
             
         if self.ShareDiag(square1, square2):
-            for diag in diagpos:
-                if square1 in diag:
-                    smalllist = diag[smaller+1:bigger]
+            for diagpos in [whitediagpos, blackdiagpos]:
+                for diag in diagpos:
+                    if (square1 in diag and square2 in diag):
+                        smalllist = diag[diag.index(smaller)+1:diag.index(bigger)]
         
         for i in smalllist:
             if self.MapPieces(i):
