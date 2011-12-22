@@ -146,54 +146,6 @@ class BoardRelations:
         if (self.CalcDistance(square1, square2) == 1):
             return True
         return False
-    
-    def ClearLine(self, square1, square2):
-        """Tests if two squares on a line have any pieces between them.
-        Returns True/False.
-        """
-        
-        if square1 == square2:
-            raise RelationError(square1, square2, 'SameSquare')
-            return False
-            
-        if self.TestAdjacent(square1, square2):
-            return True
-            
-        if square1 > square2:
-            bigger = square1
-            smaller = square2
-        else:
-            bigger = square2
-            smaller = square1
-            
-        if self.RankSeparation(square1, square2) == 0:
-            for rank in rankpos:
-                if square1 in rank:
-                    smalllist = rank[smaller+1:bigger]
-            
-        if self.FileSeparation(square1, square2) == 0:
-            for file in filepos:
-                if square1 in file:
-                    smalllist = file[smaller+1:bigger]
-            
-        if self.ShareDiag(square1, square2):
-            for diagpos in [whitediagpos, blackdiagpos]:
-                for diag in diagpos:
-                    if (square1 in diag and square2 in diag):
-                        smalllist = diag[diag.index(smaller)+1:diag.index(bigger)]
-        
-        for i in smalllist:
-            if self.MapPieces(i):
-                return False
-        
-        if not (self.TestAdjacent(square1, square2) or
-                self.RankSeparation(square1, square2) == 0 or
-                self.FileSeparation(square1, square2) == 0 or
-                self.ShareDiag(square1, square2)):
-                    raise RelationError(square1, square2, 'NotSameLine')
-                    return False
-        
-        return True
 
     def TestSameColour(self, square1, square2):
         """Tests if two squares are the same colour.

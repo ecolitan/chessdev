@@ -1,14 +1,11 @@
 from chessdev.data.data import *
 from chessdev.customexceptions import *
+from chessdev.boardrelations import *
 
-class BishopMoves():
+class BishopMoves(BoardRelations):
     """Calculate legal bishop moves.
     Accepts a BoardRelations object.
     """
-    
-    def __init__(self, position):
-        self.position = position
-        self.sidetomove = position.sidetomove
         
     def BishopSquare(self):
         """Returns a List of squares for the Bishops, for the side to move.

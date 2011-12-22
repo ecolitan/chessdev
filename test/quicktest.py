@@ -10,32 +10,7 @@ from chessdev.data.data import *
 from chessdev.data.examples import *
 
 def quicktest():
-        
-    # Testpositions objects 
-    starttest = BoardRelations(startBoard)   # startposition
-    test1 = BoardRelations(testpos1)         # no w queen
-    test2 = BoardRelations(testpos2)         # king on e6 in check
-    test3 = BoardRelations(testpos3)         # No white king
-    test4 = BoardRelations(testpos4)         # No kings
-    test5 = BoardRelations(testpos5)         # King on a3
-    test6 = Test2(testpos5)
     
-    #for boardrelations_object in [starttest, test1, test2, test5]:
-    for boardrelations_object in [test6]:
-    #for boardrelations_object in [starttest, test1, test2, test3, test4, test5]:
-        
-    #tests for kingmoves
-    
-        #test KingSquare method
-        print KingMoves(boardrelations_object).KingSquare()
-        #test PossibleSquares method
-        print KingMoves(boardrelations_object).PossibleSquares(KingMoves(boardrelations_object).KingSquare()[0])
-    
-        #Tests for RookMoves
-        print RookMoves(boardrelations_object).sidetomove
-        
-        test6 = Test2(testpos5)
-        
-        #tests for bishopmoves
-        #print BishopMoves(boardrelations_object).BishopSquare()
+    test1 = BishopMoves(startBoard)
+    print test1.sidetomove
     
