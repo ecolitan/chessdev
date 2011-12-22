@@ -113,38 +113,31 @@ class BoardRelations:
             return A
         
         return (upright(square), downright(square), upleft(square), downleft(square))
-    
-    def ShareDiag(self, square1, square2):
-        """Tests if two squares share a diagonal.
-        Accepts tuple for the square position.
-        Returns True/False.
-        """
-
-        
-        for diagdict in alldiagdict:
-            if (diagdict[square1] == diagdict[square2]):
-                return True
-        return False
-        
+          
     def RankSeparation(self, square1, square2):
         """Caclulates rank separation between two squares.
-        If both squares on same rank, RankSeparation(n,m)=0
-        Returns int"""
-        return abs(rankdict[square1] - rankdict[square2])
+        Accepts two square position Tuples.
+        Returns int
+        
+        If both squares on same rank, RankSeparation=0
+        """
+        return abs(square1[1] - square2[1])
         
     def FileSeparation(self, square1, square2):
         """Calculates file separation between two squares.
-        Returns int"""
-        return abs(filedict[square1] - filedict[square2])
+        Accepts two square position Tuples.
+        Returns int
+        """
+        return abs(square1[0] - square2[0])
         
     def CalcDistance(self, square1, square2):
         """Calculates distance between two squares.
         Distance is the greater from RankSeparation and FileSeparation. 
         Returns int"""
-        if (abs(filedict[square1] - filedict[square2]) >= abs(rankdict[square1] - rankdict[square2])):
-            return abs(filedict[square1] - filedict[square2])
+        if self.RankSeparation(square1, square2) >= self.FileSeparation(square1, square2):
+            return self.RankSeparation(square1, square2)
         else:
-            return abs(rankdict[square1] - rankdict[square2])
+            return self.FileSeparation(square1, square2)
         
     def TestAdjacent(self, square1, square2):
         """Tests if two squares are adjacent.
@@ -215,5 +208,5 @@ class BoardRelations:
         """Tests how central a square is.
         Return int
         """
-        return centraldict[square]
+        return centraldict[maparrayindex[square]]
         
