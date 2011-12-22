@@ -33,23 +33,94 @@ class BoardRelations:
         piecetotal = sum(piececount.values())
         return ((dict(piececount),  piecetotal))
  
-    def MapPieces(self, square):
-        """Returns string of what stands on a square.
-        Accepts an integer for the square name.
+    def MapPiece(self, square):
+        """Returns the piece standing on a square.
+        Accepts tuple for the square position.
+        Returns string or None
         """
-        return self.pieceplacement[square]
-    
-    def MapList(self, inlist):
-        """Returns List of with pieces for a given list."""
-        outlist = []
-        for square in inlist:
-            outlist.append(self.MapPieces(square))
-        return outlist
+        return self.pieceplacement[maparrayindex[square]]
+        
+    def CalculateDiags(self, square):
+        """Calculates diagonals belonging to a square.
+        Accepts tuple for the square position.
+        Returns Tuple of 4 Lists
+        
+        There are 1,2,3 or 4 diagonals depending on where the square is.
+        ([1],[2],[3],[4]) -> 
+            1. Up and towards the right.
+            2. Down and towards the right.
+            3. Up and towards the left.
+            4. Down and towards the left.
+        Empty lists occur when the position in on a board edge.
+        Index position 0 in each non-empty list is at distance 1 (adjacent).
+        The following members are consequtively one further square away.
+        """
+        
+        # Up and towards the right.
+        def upright(square):
+            n, m = square
+            A = []
+            def testend(a, b):
+                if (a == 8 or b == 8):
+                    return True
+                return False
+            while not testend(n, m):
+                n += 1
+                m += 1
+                A.append((n,m))
+            return A
+            
+        # Down and towards the right.
+        def downright(square):
+            n, m = square
+            A = []
+            def testend(a, b):
+                if (a == 8 or b == 1):
+                    return True
+                return False
+            while not testend(n, m):
+                n += 1
+                m -= 1
+                A.append((n,m))
+            return A
+            
+        # Up and towards the left.
+        def upleft(square):
+            n, m = square
+            A = []
+            def testend(a, b):
+                if (a == 1 or b == 8):
+                    return True
+                return False
+            while not testend(n, m):
+                n -= 1
+                m += 1
+                A.append((n,m))
+            return A
+            
+        # Down and towards the left.
+        def downleft(square):
+            n, m = square
+            A = []
+            def testend(a, b):
+                if (a == 1 or b == 1):
+                    return True
+                return False
+            while not testend(n, m):
+                n -= 1
+                m -= 1
+                A.append((n,m))
+            return A
+        
+        return (upright(square), downright(square), upleft(square), downleft(square))
     
     def ShareDiag(self, square1, square2):
         """Tests if two squares share a diagonal.
+        Accepts tuple for the square position.
         Returns True/False.
         """
+
+        
         for diagdict in alldiagdict:
             if (diagdict[square1] == diagdict[square2]):
                 return True
