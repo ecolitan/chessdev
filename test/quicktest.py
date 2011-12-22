@@ -35,6 +35,7 @@ def quicktest():
         print RookMoves(boardrelations_object).sidetomove
         
         test6 = Test2(testpos5)
+        
         #tests for bishopmoves
         #print BishopMoves(boardrelations_object).BishopSquare()
     
