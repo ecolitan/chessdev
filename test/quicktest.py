@@ -2,6 +2,10 @@ from chessdev.boardrelations import BoardRelations
 from chessdev.kingmoves import KingMoves
 from chessdev.rookmoves import RookMoves
 from chessdev.bishopmoves import BishopMoves
+import chessdev.bishopmoves
+
+from test2 import Test2
+
 from chessdev.data.data import *
 from chessdev.data.examples import *
 
@@ -14,8 +18,10 @@ def quicktest():
     test3 = BoardRelations(testpos3)         # No white king
     test4 = BoardRelations(testpos4)         # No kings
     test5 = BoardRelations(testpos5)         # King on a3
+    test6 = Test2(testpos5)
     
-    for boardrelations_object in [starttest, test1, test2, test5]:
+    #for boardrelations_object in [starttest, test1, test2, test5]:
+    for boardrelations_object in [test6]:
     #for boardrelations_object in [starttest, test1, test2, test3, test4, test5]:
         
     #tests for kingmoves
@@ -28,6 +34,7 @@ def quicktest():
         #Tests for RookMoves
         print RookMoves(boardrelations_object).sidetomove
         
+        test6 = Test2(testpos5)
         #tests for bishopmoves
-        print BishopMoves(boardrelations_object).BishopSquare()
+        #print BishopMoves(boardrelations_object).BishopSquare()
     

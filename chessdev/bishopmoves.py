@@ -32,7 +32,4 @@ class BishopMoves():
                 return blackpieces
             possiblesquares = []
             # two diagonals
-            for 
-            
-            return possiblesquares
-        
+            return None
