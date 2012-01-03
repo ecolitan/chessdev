@@ -44,7 +44,7 @@ class BoardRelations:
         return self.pieceplacement[square[0]][square[1]]
         
     def CalculateDiags(self, square):
-        """Calculates diagonals belonging to a square.
+        """Calculates diagonals expanding outwards from a square.
         Accepts tuple for the square position.
         Returns List of 4 Lists
         

@@ -19,7 +19,10 @@ def quicktest():
         #Basics
         print test.sidetomove
         print test.pieceplacement[0][2]
-        
+        # PossibleSquares method
+        print
+        print test.PossibleSquares((3,4))
+                
     def testBoardRelations(position):
         # Test BoardRelations methods
         test = BoardRelations(position)
@@ -27,7 +30,7 @@ def quicktest():
         print test.MaterialCount()
         # CalculateDiags method
         print test.CalculateDiags((3,4))
-    
+
     
     for position in [startBoard]:
         testBishopMoves(position)

@@ -1,6 +1,33 @@
-emptyBoard = ([[None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None]], 'w', [None,None,None,None],None,0,0)
-startBoard = ([['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'], ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'], [None,  None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'], ['r',  'n',  'b',  'q',  'k',  'b',  'n',  'r']],'w',['K','Q','k','q'],None,0,0)
+emptyBoard = ([[None, None, None, None, None, None, None, None],
+               [None, None, None, None, None, None, None, None],
+               [None, None, None, None, None, None, None, None],
+               [None, None, None, None, None, None, None, None],
+               [None, None, None, None, None, None, None, None],
+               [None, None, None, None, None, None, None, None],
+               [None, None, None, None, None, None, None, None],
+               [None, None, None, None, None, None, None, None]],
+               'w', [None,None,None,None],None,0,0)
 
+startBoard = ([['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'],
+               ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
+               [None,  None, None, None, None, None, None, None],
+               [None, None, None, None, None, None, None, None],
+               [None, None, None, None, None, None, None, None],
+               [None, None, None, None, None, None, None, None],
+               ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
+               ['r',  'n',  'b',  'q',  'k',  'b',  'n',  'r']],
+               'w',['K','Q','k','q'],None,0,0)
+
+testpos1 = ([['R', None, 'B', 'Q', 'R', None, 'K', None],
+            ['P', 'P', 'B', None, None, 'P', 'P', None],
+            [None, None, 'P', None, None, 'N', 'N', 'P'],
+            [None, None, 'p', None, 'P', None, None, None],
+            [None, 'p', 'n', 'P', 'p', None, None, None],
+            ['p', None, None, 'p', None, 'n', None, None],
+            [None, None, 'q', None, 'b', 'p', 'p', 'p'],
+            ['r', None, 'b', None, 'r', None, 'k', None]],
+            'w', [None,None,None,None],None,0,0)
+            
 piecetypes = ['R', 'N', 'B', 'Q', 'K', 'P', 'r', 'n', 'b', 'q', 'k', 'p']
 whitepieces = ['R', 'N', 'B', 'Q', 'K', 'P']
 blackpieces = ['r', 'n', 'b', 'q', 'k', 'p']
@@ -14,5 +41,7 @@ boardpos = [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7),
             (6, 0), (6, 1), (6, 2), (6, 3), (6, 4), (6, 5), (6, 6), (6, 7),
             (7, 0), (7, 1), (7, 2), (7, 3), (7, 4), (7, 5), (7, 6), (7, 7)]
     
+
+
 
 
