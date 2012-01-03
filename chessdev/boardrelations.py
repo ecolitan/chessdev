@@ -6,9 +6,12 @@ class BoardRelations:
     """The relationships between the elements of a board position.
     Accepts a BoardPosition.
     A single board position.
-    Position format: ( [ 01, 02, ... , 63],                          # Piece placement or None,
+    Position format: ( [[a1, b1, ... , h1],
+                        [a2, b2, ... , h2],
+                        ... ,
+                        [a8, b8, ... , h8] ]                         # Piece placement or None,
                        'w' | 'b',                                    # Side to move.
-                       [ 'K', 'Q', 'k', 'q' ],                       # Castling rights or None.
+                       ['K', 'Q', 'k', 'q'],                         # Castling rights or None.
                        int,                                          # en passant square or None.
                        int,                                          # half move clock - since last pawn advance or capture.
                        int,                                          # fullmove number.
@@ -27,9 +30,9 @@ class BoardRelations:
     def MaterialCount(self):
         """Returns a tuple with a dictionary of the counts of each piece, and total number of pieces"""
         piececount = Counter()
-        for piece in self.pieceplacement:
-            if piece:
-                piececount[piece] += 1
+        for square in boardpos:
+            if self.MapPiece(square):
+                piececount[self.MapPiece(square)] += 1
         piecetotal = sum(piececount.values())
         return ((dict(piececount),  piecetotal))
  
@@ -38,12 +41,12 @@ class BoardRelations:
         Accepts tuple for the square position.
         Returns string or None
         """
-        return self.pieceplacement[maparrayindex[square]]
+        return self.pieceplacement[square[0]][square[1]]
         
     def CalculateDiags(self, square):
         """Calculates diagonals belonging to a square.
         Accepts tuple for the square position.
-        Returns Tuple of 4 Lists
+        Returns List of 4 Lists
         
         There are 1,2,3 or 4 diagonals depending on where the square is.
         ([1],[2],[3],[4]) -> 
@@ -112,7 +115,7 @@ class BoardRelations:
                 A.append((n,m))
             return A
         
-        return (upright(square), downright(square), upleft(square), downleft(square))
+        return [upright(square), downright(square), upleft(square), downleft(square)]
           
     def RankSeparation(self, square1, square2):
         """Caclulates rank separation between two squares.

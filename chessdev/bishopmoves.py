@@ -7,17 +7,23 @@ class BishopMoves(BoardRelations):
     Accepts a BoardRelations object.
     """
         
-    def BishopSquare(self):
-        """Returns a List of squares for the Bishops, for the side to move.
-        Returns list
+    def BishopSquares(self, colour):
+        """Returns a List of squares for the Bishops, for the given colour.
+        Returns List or None
         """
-        if self.sidetomove == 'w':
-            return [piecesquare for piecesquare,x in enumerate(self.position.pieceplacement) if x == 'B']
-        elif self.sidetomove == 'b':
-            return [piecesquare for piecesquare,x in enumerate(self.position.pieceplacement) if x == 'b']
+        squares = []
+        if colour == 'w':
+            for i in boardpos:
+                if self.MapPiece(i) == 'B':
+                    squares.append(i)
+        elif colour == 'b':
+            for i in boardpos:
+                if self.MapPiece(i) == 'b':
+                    squares.append(i)
         else:
-            raise PositionError(self.position, 'CantFindBishops')
-            
+            squares = None
+        return squares
+        
     def PossibleSquares(self, square):
         """Returns a list of possible moves for a bishop to move to.
         Returns List
@@ -30,3 +36,4 @@ class BishopMoves(BoardRelations):
             possiblesquares = []
             # two diagonals
             return None
+        return self.CalculateDiags(square)

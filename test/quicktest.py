@@ -4,13 +4,31 @@ from chessdev.rookmoves import RookMoves
 from chessdev.bishopmoves import BishopMoves
 import chessdev.bishopmoves
 
-from test2 import Test2
+#from test2 import Test2
 
 from chessdev.data.data import *
-from chessdev.data.examples import *
 
 def quicktest():
     
-    test1 = BishopMoves(startBoard)
-    print test1.sidetomove
+    def testBishopMoves(position):
+        #Test BishopMoves Methods
+        test = BishopMoves(position)
+        #BishopSquares method
+        print test.BishopSquares('w')
+        print test.BishopSquares('b')
+        #Basics
+        print test.sidetomove
+        print test.pieceplacement[0][2]
+        
+    def testBoardRelations(position):
+        # Test BoardRelations methods
+        test = BoardRelations(position)
+        # MaterialCount method
+        print test.MaterialCount()
+        # CalculateDiags method
+        print test.CalculateDiags((3,4))
     
+    
+    for position in [startBoard]:
+        testBishopMoves(position)
+        testBoardRelations(position)
