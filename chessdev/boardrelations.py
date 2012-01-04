@@ -253,3 +253,4 @@ class BoardRelations:
             return A
         
         return [toright(square), toleft(square)]
+        
