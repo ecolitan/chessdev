@@ -32,6 +32,6 @@ def quicktest():
         print test.CalculateDiags((3,4))
 
     
-    for position in [startBoard]:
+    for position in [testpos1]:
         testBishopMoves(position)
         testBoardRelations(position)

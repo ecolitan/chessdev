@@ -64,7 +64,7 @@ class BoardRelations:
             n, m = square
             A = []
             def testend(a, b):
-                if (a == 8 or b == 8):
+                if (a == 7 or b == 7):
                     return True
                 return False
             while not testend(n, m):
@@ -78,7 +78,7 @@ class BoardRelations:
             n, m = square
             A = []
             def testend(a, b):
-                if (a == 8 or b == 1):
+                if (a == 7 or b == 0):
                     return True
                 return False
             while not testend(n, m):
@@ -92,7 +92,7 @@ class BoardRelations:
             n, m = square
             A = []
             def testend(a, b):
-                if (a == 1 or b == 8):
+                if (a == 0 or b == 7):
                     return True
                 return False
             while not testend(n, m):
@@ -106,7 +106,7 @@ class BoardRelations:
             n, m = square
             A = []
             def testend(a, b):
-                if (a == 1 or b == 1):
+                if (a == 0 or b == 0):
                     return True
                 return False
             while not testend(n, m):
