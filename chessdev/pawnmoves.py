@@ -1,11 +1,8 @@
 from chessdev.data.data import *
 from chessdev.customexceptions import *
+from chessdev.boardrelations import *
 
-class PawnMoves():
-    """Calculate legal pawn moves.
-    Accepts a BoardRelations object.
+class PawnMoves(BoardRelations):
+    """Calculate various pawn moves.
     """
-    
-    def __init__(self, position):
-        self.position = position
-        self.sidetomove = position.sidetomove
+

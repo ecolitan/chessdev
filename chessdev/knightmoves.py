@@ -1,11 +1,8 @@
 from chessdev.data.data import *
 from chessdev.customexceptions import *
+from chessdev.boardrelations import *
 
-class KnightMoves():
-    """Calculate legal knight moves.
-    Accepts a BoardRelations object.
+class KnightMoves(BoardRelations):
+    """Calculate various knight moves.
     """
-    
-    def __init__(self, position):
-        self.position = position
-        self.sidetomove = position.sidetomove
+

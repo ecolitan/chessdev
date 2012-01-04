@@ -1,44 +1,26 @@
 from chessdev.data.data import *
 from chessdev.customexceptions import *
+from chessdev.boardrelations import *
 
-class KingMoves:
-    """Calculates legal King moves.
-    Accepts a BoardRelations Object
+class KingMoves(BoardRelations):
+    """Calculates various King moves.
     """
-    
-    def __init__(self, position):
-        self.position = position
-        self.sidetomove = position.sidetomove
-        
-    def KingSquare(self):
-        """Returns the square of the king, for the side to move.
-        Returns list
-        """
-        if self.sidetomove == 'w':
-            return [piecesquare for piecesquare,x in enumerate(self.position.pieceplacement) if x == 'K']
-        elif self.sidetomove == 'b':
-            return [piecesquare for piecesquare,x in enumerate(self.position.pieceplacement) if x == 'k']
-        else:
-            raise PositionError(self.position, 'CantFindKing')
             
     def PossibleSquares(self, square):
-        """Returns a list of possible squares for the king to move to.
-        Doesn't worry about check, only that the square is not occupied by a piece of the same colour."""
+        """Returns a list of possible squares for a king to move to.
+        Doesn't worry about check, only that the square is not occupied by a piece of the same colour.
+        Accepts square Tuple.
+        Returns List.
+        """
+        squares = []
+        samecolour = self.PieceColour(square)
         
-        def ourpieces():
-            if self.sidetomove == 'w':
-                return whitepieces
-            else:
-                return blackpieces
-        
-        possiblesquares = []
+        #for each adjacent square no occupied by a friendly piece, include square
         for i in boardpos:
-            if self.position.TestAdjacent(square, i):
-                if not self.position.MapPieces(i):
-                    possiblesquares.append(i)
-                elif self.position.MapPieces(i) not in ourpieces():
-                    possiblesquares.append(i)
-        return possiblesquares
+            if self.TestAdjacent(square, i):
+                if not self.MapPiece(i) in samecolour:
+                    squares.append(i)
+        return squares
         
     def movelist(self, position):
         """Returns a list of legal king moves."""

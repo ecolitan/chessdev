@@ -49,7 +49,7 @@ class BoardRelations:
         Returns List of 4 Lists
         
         There are 1,2,3 or 4 diagonals depending on where the square is.
-        ([1],[2],[3],[4]) -> 
+        [[1],[2],[3],[4]] -> 
             1. Up and towards the right.
             2. Down and towards the right.
             3. Up and towards the left.
@@ -151,6 +151,7 @@ class BoardRelations:
         return False
 
     def TestSameColour(self, square1, square2):
+        #broken
         """Tests if two squares are the same colour.
         if (rankseparation + filesepatation)/2 has 0 remainder, the squares are the same colour
         Returns True/False.
@@ -160,8 +161,95 @@ class BoardRelations:
         return False
         
     def CentralValue(self, square1):
-        """Tests how central a square is.
+        #broken
+        """Tests how central a square is.#broken
         Return int
         """
         return centraldict[maparrayindex[square]]
         
+    def FindPieces(self, piece):
+        """Returns a List of squares for the piece given, Colour sensitive.
+        Accepts piece String.
+        Returns List.
+        """
+        squares = []
+        for i in boardpos:
+            if self.MapPiece(i) == piece:
+                squares.append(i)
+        return squares
+        
+    def PieceColour(self, square):
+        """Returns the List of pieces, the same colour as the piece on a given square.
+        Accepts square position Tuple.
+        Returns List.
+        """
+        if self.MapPiece(square) in whitepieces:
+            return whitepieces
+        elif self.MapPiece(square) in blackpieces:
+            return blackpieces
+        else:
+            raise PositionError(self.position, 'NoPieceFound')
+    
+    def CalculateFiles(self, square):
+        """Calculates files expanding outwards from a square.
+        Accepts tuple for the square position.
+        Returns List of 2 Lists
+        
+        There are 1,2 ranks depending on where the square is.
+        [[1],[2]] -> 
+            1. Towards the top.
+            2. Towards the bottom.
+        Empty lists occur when the position in on a board edge.
+        Index position 0 in each non-empty list is at distance 1 (adjacent).
+        The following members are consequtively one further square away.
+        """            
+        #import pdb; pdb.set_trace()
+        def totop(square):
+            n,m = square
+            A = []
+            while not n >= 7:
+                n += 1
+                A.append((n,m))
+            return A
+        
+        def tobottom(square):
+            n,m = square
+            A = []
+            while not n <= 0:
+                n -= 1
+                A.append((n,m))
+            return A
+        
+        return [totop(square), tobottom(square)]
+    
+    def CalculateRanks(self, square):
+        """Calculates ranks expanding outwards from a square.
+        Accepts tuple for the square position.
+        Returns List of 2 Lists
+        
+        There are 1,2 ranks depending on where the square is.
+        [[1],[2]] -> 
+            1. Towards the right.
+            2. Towards the left.
+        Empty lists occur when the position in on a board edge.
+        Index position 0 in each non-empty list is at distance 1 (adjacent).
+        The following members are consequtively one further square away.
+        """
+        #import pdb; pdb.set_trace()
+        def toright(square):
+            n,m = square
+            A = []
+            while not m >= 7:
+                m += 1
+                A.append((n,m))
+            return A
+        
+        def toleft(square):
+            n,m = square
+            A = []
+            while not m <= 0:
+                m -= 1
+                A.append((n,m))
+            return A
+        
+        return [toright(square), toleft(square)]
