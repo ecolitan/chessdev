@@ -1,16 +1,38 @@
-relationships between squares:
-    calculate possible piece moves from each square
-
-Exception handling!!
-    SpanError('SameSquare')
-
 Test suite
 
-IsCheck
+Legal moves are moves which result in a legal position.
+
 Is a square check?
-Is a square occupied by a piece of the same colour?
+    Look at all possible moves for all enemy pieces, if square in list, square is check.
+    
+Is a position Legal?
+    Number of Kings.
+    Both kings not in check.
+    Enemy king cannot be captured (would imply did not move out of check previous turn)
+    
+Is a position Mate?
+    King square in check, and after all possible moves King square in check.
+    
+Is a position Stalemate?
+    Zero possible legal moves.
+
+Pawn promotion.
 
 
 1. Give a position and print a list of legal moves.
 
-KingMoves.KingSquare may not return none. If king not found must tantrum.
+Load position:
+    isLegal?
+        no => Error
+List all possible squares for all pieces: (include pawn promotions)
+    Generate position resulting from that move:
+        isLegal?
+            no => Not a legal move
+            yes => Add to legal moves list
+        isMate?
+            yes => return move as mate
+        isStale?
+            yes => return move as stale
+            
+
+

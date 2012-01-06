@@ -12,7 +12,7 @@ class BoardRelations:
                         [a8, b8, ... , h8] ]                         # Piece placement or None,
                        'w' | 'b',                                    # Side to move.
                        ['K', 'Q', 'k', 'q'],                         # Castling rights or None.
-                       int,                                          # en passant square or None.
+                       (n,m),                                        # en passant square or None.
                        int,                                          # half move clock - since last pawn advance or capture.
                        int,                                          # fullmove number.
                     )

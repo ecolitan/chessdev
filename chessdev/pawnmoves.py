@@ -14,24 +14,44 @@ class PawnMoves(BoardRelations):
         """
         squares = []
         samecolour = self.PieceColour(square)
-        
-        #if pawn unmoved, can move one or two squares.
-        if square[0] == 1 or square[0] == 6:
-            unmoved = True
+        unmoved = False
+        n,m = square
         
         #white pawns go to higher numbers, black pawns to lower
         if self.MapPiece(square) == 'P':
-            if unmoved:
-                pass
-        
-        
-        
-        #for each diagonal, look forwards one square. If enemy piece, include square.
-        for diag in self.CalculateDiags(square):
-            if diag:
-                for square in diag:
-                    if self.MapPiece(square) not in samecolour:
-                        squares.append(square)
-                    else:
-                        break
+            if n=1:
+                unmoved = True
+            if self.MapPiece(n+1,m):
+                squares.append(n+1,m)
+                if unmoved:
+                    if self.MapPiece(n+2,m):
+                        squares.append(n+2,m)
+            if m+1 != 8:
+                if self.MapPiece(n+1,m+1) not in samecolour:
+                    squares.append(n+1,m+1)
+            if m-1 != -1:
+                if self.MapPiece(n+1,m-1) not in samecolour:
+                    squares.append(n+1,m-1)
+            if self.epsquare:
+                if (n+1,m-1) == self.epsquare or (n+1,m+1) == self.epsquare:
+                    squares.append(self.epsquare)
+                
+        if self.MapPiece(square) == 'p':
+            if n=6:
+                unmoved = True
+            if self.MapPiece(n-1,m):
+                squares.append(n-1,m)
+                if unmoved:
+                    if self.MapPiece(n-2,m):
+                        squares.append(n-2,m)
+            if m+1 != 8:
+                if self.MapPiece(n-1,m+1) not in samecolour:
+                    squares.append(n-1,m+1)
+            if m-1 != -1:
+                if self.MapPiece(n-1,m-1) not in samecolour:
+                    squares.append(n-1,m-1)
+            if self.epsquare:
+                if (n-1,m-1) == self.epsquare or (n-1,m+1) == self.epsquare:
+                    squares.append(self.epsquare)
+
         return squares
