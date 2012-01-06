@@ -33,6 +33,7 @@ List all possible squares for all pieces: (include pawn promotions)
             yes => return move as mate
         isStale?
             yes => return move as stale
-            
+
+TestEdit
 
 
