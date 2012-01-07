@@ -35,3 +35,23 @@ class KnightMoves(BoardRelations):
                 squares.remove(diag[1])
                 
         return squares
+
+    def PossibleMoves(self, square):
+        """Returns list of possible moves for a piece on a given square.
+        Accepts square Tuple.
+        Returns List of two-square Tuples.
+        """
+        moves = []
+        for i in self.PossibleSquares(square):
+            moves.append((square,i))
+        return moves
+        
+    def PossibleCaptures(self.square):
+        """Returns list of possible captures for a piece on a given square.
+        Accepts square Tuple.
+        Returns List of squares."""
+        squares = []
+        for i in self.PossibleSquares(square):
+            if self.MapPiece(i):
+                squares.append(i)
+        return squares
