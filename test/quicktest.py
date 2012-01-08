@@ -1,8 +1,5 @@
 from chessdev.boardrelations import BoardRelations
-from chessdev.kingmoves import KingMoves
-from chessdev.rookmoves import RookMoves
-from chessdev.bishopmoves import BishopMoves
-import chessdev.bishopmoves
+from chessdev.piecemoves import *
 
 #from test2 import Test2
 

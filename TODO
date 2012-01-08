@@ -34,6 +34,3 @@ List all possible squares for all pieces: (include pawn promotions)
         isStale?
             yes => return move as stale
 
-TestEdit
-
-
