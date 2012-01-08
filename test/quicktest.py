@@ -39,9 +39,15 @@ def quicktest():
         print
         print test.PossibleSquares(test.FindPieces('R')[1])
         
-
+    def testQueenMoves(position):
+        test = QueenMoves(position)
+        print test.FindPieces('Q')
+        print
+        print test.PossibleSquares(test.FindPieces('Q')[0])        
+        
     for position in [testpos1]:
         testBishopMoves(position)
         testBoardRelations(position)
         testKingMoves(position)
         testRookMoves(position)
+        testQueenMoves(position)
