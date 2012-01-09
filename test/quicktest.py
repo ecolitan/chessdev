@@ -7,47 +7,14 @@ from chessdev.data.data import *
 
 def quicktest():
     
-    def testBishopMoves(position):
-        #Test BishopMoves Methods
-        test = BishopMoves(position)
-        #FindPieces method
-        print test.FindPieces('B')
-        print test.FindPieces('n')
-        #Basics
-        print test.sidetomove
-        print test.pieceplacement[0][2]
-        # PossibleSquares method
-        print
-        print test.PossibleSquares(test.FindPieces('B')[0])
-                
-    def testBoardRelations(position):
-        # Test BoardRelations methods
-        test = BoardRelations(position)
-        # MaterialCount method
-        print test.MaterialCount()
-        # CalculateDiags method
-        print test.CalculateDiags((3,4))
-        
-    def testKingMoves(position):
-        test = KingMoves(position)
-        print test.FindPieces('K')
-        print test.PossibleSquares(test.FindPieces('K')[0])
-        
-    def testRookMoves(position):
-        test = RookMoves(position)
-        print test.FindPieces('R')
-        print
-        print test.PossibleSquares(test.FindPieces('R')[1])
-        
-    def testQueenMoves(position):
-        test = QueenMoves(position)
-        print test.FindPieces('Q')
-        print
-        print test.PossibleSquares(test.FindPieces('Q')[0])        
-        
+    def testpiecemoves(position):
+        test = PieceMoves(position)
+        for i in boardpos:
+            print i
+            print test.MapPiece(i)
+            print test.PossibleSquares(i)
+            print test.PossibleCaptures(i)
+            print
+            
     for position in [testpos1]:
-        testBishopMoves(position)
-        testBoardRelations(position)
-        testKingMoves(position)
-        testRookMoves(position)
-        testQueenMoves(position)
+        testpiecemoves(position)

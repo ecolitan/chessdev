@@ -17,7 +17,7 @@ Is a position Stalemate?
     Zero possible legal moves.
 
 Pawn promotion.
-
+Castling.
 
 1. Give a position and print a list of legal moves.
 
