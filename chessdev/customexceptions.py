@@ -21,3 +21,11 @@ class RelationError(Error):
     def __str__(self):
         return repr(self.p1, self.p2, self.message)
 
+class DeadlyError(Error):
+    """Exception raised for really errors."""
+    
+    def __init__(self, message):
+        self.message = message
+        
+    def __str__(self):
+        return repr(self.message)

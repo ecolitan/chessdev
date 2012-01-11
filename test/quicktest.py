@@ -1,5 +1,4 @@
 from chessdev.boardrelations import BoardRelations
-from chessdev.piecemoves import *
 
 #from test2 import Test2
 
@@ -8,7 +7,7 @@ from chessdev.data.data import *
 def quicktest():
     
     def testpiecemoves(position):
-        test = PieceMoves(position)
+        test = BoardRelations(position)
         for i in boardpos:
             print i
             print test.MapPiece(i)

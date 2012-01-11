@@ -3,7 +3,7 @@ from chessdev.customexceptions import *
 from chessdev.boardrelations import *
 
 class PieceMoves(BoardRelations):
-    """Calculate how the various pieces can move."""
+    """Calculate how the various pieces can move in a given position."""
     
     def BishopSquares(self, square):
         """Returns a list of possible squares for a bishop to move to.
@@ -220,3 +220,6 @@ class PieceMoves(BoardRelations):
             if self.MapPiece(i):
                 squares.append(i)
         return squares
+        
+    
+        
