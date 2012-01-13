@@ -1,4 +1,4 @@
-emptyBoard = ([[None, None, None, None, None, None, None, None],
+emptyBoard = [[[None, None, None, None, None, None, None, None],
                [None, None, None, None, None, None, None, None],
                [None, None, None, None, None, None, None, None],
                [None, None, None, None, None, None, None, None],
@@ -6,9 +6,9 @@ emptyBoard = ([[None, None, None, None, None, None, None, None],
                [None, None, None, None, None, None, None, None],
                [None, None, None, None, None, None, None, None],
                [None, None, None, None, None, None, None, None]],
-               'w', [False,False,False,False],None,0,0)
+               'w', [False,False,False,False],None,0,0]
 
-startBoard = ([['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'],
+startBoard = [[['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'],
                ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
                [None,  None, None, None, None, None, None, None],
                [None, None, None, None, None, None, None, None],
@@ -16,9 +16,9 @@ startBoard = ([['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'],
                [None, None, None, None, None, None, None, None],
                ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
                ['r',  'n',  'b',  'q',  'k',  'b',  'n',  'r']],
-               'w',[True,True,True,True],None,0,0)
+               'w',[True,True,True,True],None,0,0]
 
-testpos1 = ([['R', None, 'B', 'Q', 'R', None, 'K', None],
+testpos1 = [[['R', None, 'B', 'Q', 'R', None, 'K', None],
             ['P', 'P', 'B', None, None, 'P', 'P', None],
             [None, None, 'P', None, None, 'N', 'N', 'P'],
             [None, None, 'p', None, 'P', None, None, None],
@@ -26,7 +26,7 @@ testpos1 = ([['R', None, 'B', 'Q', 'R', None, 'K', None],
             ['p', None, None, 'p', None, 'n', None, None],
             [None, None, 'q', None, 'b', 'p', 'p', 'p'],
             ['r', None, 'b', None, 'r', None, 'k', None]],
-            'w', [False,False,False,False],None,6,15)
+            'w', [False,False,False,False],None,6,15]
             
 piecetypes = ['R', 'N', 'B', 'Q', 'K', 'P', 'r', 'n', 'b', 'q', 'k', 'p']
 whitepieces = ['R', 'N', 'B', 'Q', 'K', 'P']

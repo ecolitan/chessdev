@@ -45,17 +45,29 @@ class PreSearch():
                 return True
             return False
             
+        def isKingMove(move):
+            """Check if a move is a king move.
+            Return True or False.
+            """
+            if boardobject.MapPiece(move[0]) in ['K', 'k']:
+                return True
+            return False
+            
         def isDoublePawnMove(move):
             """Check if a pawn is moving two squares.
             Needed to calculate EP Square.
-            Move must already be a know pawn move.
             Return True or False.
             """
-            pass
+            if boardobject.MapPiece(move[0]) in ['P', 'p']:
+                if (move[0][0] in [1, 6]) and (move[1][0] in [2, 5]):
+                    return True
+            return False
             
         def isCapture(move):
             """Check if a move is a capture."""
-            pass
+            if boardobject.MapPiece(move[1]) not None:
+                return True
+            return False
             
         def isPromotion(move):
             """Check if a move is a pawn promotion."""
@@ -86,17 +98,46 @@ class PreSearch():
                 newboardposition[1] = 'w'
             
             # Update Castling Rights
-            #if movetype == "castle" PUT inside pieceplacement update.
+            if boardobject.sidetomove == 'w':
+                if movetype == "castle":
+                    newboardposition[2][0] = False
+                    newboardposition[2][1] = False
+                elif isKingMove(move):
+                    newboardposition[2][0] = False
+                    newboardposition[2][1] = False
+                elif move[0] == (0, 0) or move[1] == (0, 0):
+                    newboardposition[2][1] = False
+                elif move[0] == (0, 7) or move[1] == (0, 7):
+                    newboardposition[2][0] = False
+            if boardobject.sidetomove == 'b':
+                if movetype == "castle":
+                    newboardposition[2][2] = False
+                    newboardposition[2][3] = False
+                elif isKingMove(move):
+                    newboardposition[2][2] = False
+                    newboardposition[2][3] = False
+                elif move[0] == (7, 0) or move[1] == (7, 0):
+                    newboardposition[2][3] = False
+                elif move[0] == (7, 7) or move[1] == (7, 7):
+                    newboardposition[2][2] = False   
             
             # Update EP Square
-            #if isDoublePawnMove; create EP Square behind pawn.
+            if isDoublePawnMove(move):
+                newboardposition[3] = ((move[0][0])+(move[1][0]))/2
+            else:
+                newboardposition[3] = None
             
             # Update Halfmoveclock
-            #if last move by pawn or capture, reset to 0
-            #else increment by 1
+            if isPawnMove(move):
+                newboardposition[4] = 0
+            elif isCapture(move):
+                newboardposition[4] = 0
+            else:
+                newboardposition[4] += 1
             
             # Update fullmove
-            #if now wtm; increment
+            if boardobject.sidetomove == 'b':
+                newboardposition[5] += 1
             
         pass
     
