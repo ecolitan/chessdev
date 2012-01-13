@@ -11,7 +11,7 @@ class BoardRelations:
                         ... ,
                         [a8, b8, ... , h8] ]                         # Piece placement or None,
                        'w' | 'b',                                    # Side to move.
-                       ['K', 'Q', 'k', 'q'],                         # Castling rights or None.
+                       ['K', 'Q', 'k', 'q'],                         # Castling rights True or False.
                        (n,m),                                        # en passant square or None.
                        int,                                          # half move clock - since last pawn advance or capture.
                        int,                                          # fullmove number.
@@ -461,6 +461,25 @@ class BoardRelations:
             squares = self.PawnSquares(square)
         return squares
         
+    def PossibleMoves(self):
+        """Returns a list of possible moves, only for the pieces on the side to move.
+        The resulting moves are in the form of two square tuples:
+            e.g a1 -> d1 : ((0,0),(0,3))
+        Returns List.
+        """
+        movelist = []
+        
+        if colour == 'w':
+            samecolour = whitepieces
+        if colour == 'b':
+            samecolour = blackpieces
+        
+        for i in boardpos:
+            if self.MapPiece(i) in samecolour:
+                for j in self.PossibleSquares(i):
+                    movelist.append((i,j))
+        return movelist
+        
     def PossibleCaptures(self, square):
         """Returns list of possible captures for a piece on a given square.
         Accepts square Tuple.
@@ -471,9 +490,71 @@ class BoardRelations:
                 squares.append(i)
         return squares
         
-    def isCheck(self, square, colour):
+    def PossibleCastle(self):
+        """Returns list of possible castling for the side to move.
+        We check the squares are free, castling rights are present, the king is not in check,
+        the square the rook lands on not in check, the square the king lands on not in check.
+        The castling rights are a list of True|False flags which keep track if the king or rook have been moved.
+        self.castlingrights = ['K', 'Q', 'k', 'q']
+        return [True|False(kingside), True,False(queenside)]
+        Returns List.
+        """
+        def wks():
+            #white king side
+            if not self.castlingrights[0]:
+                return False
+            if self.MapPiece((0,5)) or self.MapPiece((0,6)):
+                return False
+            if self.isCheck((0,5)) or self.isCheck((0,6)):
+                return False
+            return True
+            
+        def bks():
+            #black king side
+            if not self.castlingrights[2]:
+                return False
+            if self.MapPiece((7,5)) or self.MapPiece((7,6)):
+                return False
+            if self.isCheck((7,5)) or self.isCheck((7,6)):
+                return False
+            return True
+            
+        def wqs():
+            #white queen side
+            if not self.castlingrights[1]:
+                return False
+            if self.MapPiece((0,3)) or self.MapPiece((0,2)):
+                return False
+            if self.isCheck((0,3)) or self.isCheck((0,2)):
+                return False
+            return True
+            
+        def bqs():
+            #black queen side
+            if not self.castlingrights[2]:
+                return False
+            if self.MapPiece((7,3)) or self.MapPiece((7,2)):
+                return False
+            if self.isCheck((7,3)) or self.isCheck((7,2)):
+                return False
+            return True
+        
+        if self.sidetomove == 'w':
+            if self.isCheck((0,4)):
+                return [False,False]
+            else:
+                return [wks(),wqs()]
+            
+        elif self.sidetomove == 'b':
+            if self.isCheck((7,4)):
+                return [False,False]
+            else:
+                return [bks(),bqs()]
+        
+    def isCheck(self, square, colour=self.sidetomove):
         """Returns True or False for if a square is attacked or not for a given colour.
         The colour means, if a king of that colour would be on the square, would it be in check.
+        Default colour is the sidetomove.
         Accepts a square tuple, and a colour string.
         Returns True or False.
         """
@@ -486,21 +567,22 @@ class BoardRelations:
             
         for i in boardpos:
             if boardobject.MapPiece(i) in enemypieces:
-                if square in boardobject.PossibleSquares(i)
+                if square in boardobject.PossibleSquares(i):
                     return True
         return False
-        
-    def isMate(self):
-        """Returns True or False for if a position is a checkmate.
-        Returns True or False.
-        """
-        if not self.isCheck(square):
-            return False
-            #TODO
             
-    def isStale(self):
-        """Returns True or False for if a position is a stalemate.
-        Returns True or False."""
-        return False
-        #TODO
-    
+    def isLegal(self):
+        """Returns True if the position meets basic requirements of being legal.
+        King not on move must not be in check.
+        Returns True or False
+        """
+        if self.sidetomove == 'w':
+            otherking = self.FindPieces('k')
+            waitcolour = 'b'
+        elif self.sidetomove == 'b':
+            otherking = self.FindPieces('K')
+            waitcolour = 'w'
+        
+        if isCheck(otherking, waitcolour):
+            return False
+        return True

@@ -9,11 +9,10 @@ def quicktest():
     def testpiecemoves(position):
         test = BoardRelations(position)
         for i in boardpos:
-            print i
-            print test.MapPiece(i)
-            print test.PossibleSquares(i)
-            print test.PossibleCaptures(i)
-            print
+            i
+            test.MapPiece(i)
+            test.PossibleSquares(i)
+            test.PossibleCaptures(i)
             
     for position in [testpos1]:
         testpiecemoves(position)

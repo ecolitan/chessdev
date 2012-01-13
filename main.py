@@ -11,9 +11,17 @@ def main():
     #some testing
     quicktest()
 
+num_runs = 1000
 
 if __name__ == '__main__':
     start_time = time.time()
+    
+    for i in xrange (0,num_runs):
+        main()
+    
+    
+    simple_time = (time.time() - start_time)/num_runs
+    #print simple_time, "seconds per run"
+    print 1/simple_time, "NPS"
+    
     #profile.run('main()')
-    main()
-    print time.time() - start_time, "seconds"
