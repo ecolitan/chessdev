@@ -4,9 +4,9 @@ from chessdev.customexceptions import *
 
 class BoardRelations:
     """The relationships between the elements of a board position.
-    Accepts a board position tuple.
+    Accepts a board position List.
     A single board position:
-    Position format: ( [[a1, b1, ... , h1],
+    Position format: [ [[a1, b1, ... , h1],
                         [a2, b2, ... , h2],
                         ... ,
                         [a8, b8, ... , h8] ]                         # Piece placement or None,
@@ -15,7 +15,7 @@ class BoardRelations:
                        (n,m),                                        # en passant square or None.
                        int,                                          # half move clock - since last pawn advance or capture.
                        int,                                          # fullmove number.
-                    )
+                    ]
     This object is called a boardobject once created,
     it has all the methods needed to find out all possible
     things to do with a particular board position.
@@ -505,7 +505,7 @@ class BoardRelations:
                 return False
             if self.MapPiece((0,5)) or self.MapPiece((0,6)):
                 return False
-            if self.isCheck((0,5)) or self.isCheck((0,6)):
+            if self.isCheck((0,5), 'w') or self.isCheck((0,6), 'w'):
                 return False
             return True
             
@@ -515,7 +515,7 @@ class BoardRelations:
                 return False
             if self.MapPiece((7,5)) or self.MapPiece((7,6)):
                 return False
-            if self.isCheck((7,5)) or self.isCheck((7,6)):
+            if self.isCheck((7,5), 'b') or self.isCheck((7,6), 'b'):
                 return False
             return True
             
@@ -525,7 +525,7 @@ class BoardRelations:
                 return False
             if self.MapPiece((0,3)) or self.MapPiece((0,2)):
                 return False
-            if self.isCheck((0,3)) or self.isCheck((0,2)):
+            if self.isCheck((0,3), 'w') or self.isCheck((0,2), 'w'):
                 return False
             return True
             
@@ -535,7 +535,7 @@ class BoardRelations:
                 return False
             if self.MapPiece((7,3)) or self.MapPiece((7,2)):
                 return False
-            if self.isCheck((7,3)) or self.isCheck((7,2)):
+            if self.isCheck((7,3), 'b') or self.isCheck((7,2), 'b'):
                 return False
             return True
         
@@ -551,7 +551,7 @@ class BoardRelations:
             else:
                 return [bks(),bqs()]
         
-    def isCheck(self, square, colour=self.sidetomove):
+    def isCheck(self, square, colour):
         """Returns True or False for if a square is attacked or not for a given colour.
         The colour means, if a king of that colour would be on the square, would it be in check.
         Default colour is the sidetomove.

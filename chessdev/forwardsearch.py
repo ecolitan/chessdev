@@ -31,10 +31,32 @@ class PreSearch():
         self.epsquare = position[3]
         self.halfmoveclock = position[4]
         self.fullmoves = position[5]
+        move ((0,0),(0,3)) 
         """
         objectlist = []
         moveslist = boardobject.PossibleMoves()
+        castlelist = boardobject.PossibleCastle()
         
+        def isPawnMove(move):
+            """Check if a move is a pawn move.
+            Return True or False.
+            """
+            if boardobject.MapPiece(move[0]) in ['P', 'p']:
+                return True
+            return False
+            
+        def isDoublePawnMove(move):
+            """Check if a pawn is moving two squares.
+            Needed to calculate EP Square.
+            Move must already be a know pawn move.
+            Return True or False.
+            """
+            pass
+            
+        def isCapture(move):
+            """Check if a move is a capture."""
+            pass
+            
         def isPromotion(move):
             """Check if a move is a pawn promotion."""
             #check if destination square is first or last rank
@@ -45,12 +67,37 @@ class PreSearch():
                 return False
             return True
         
-        def UpdatePiecePlacement(newboard):
+        def createBoardPosition(move, movetype, promoteto=None):
+            """Create a new boardposition.
+            if movetype = "simple", move must be a move tuple.
+            if movetype = "castle", move must be either "k" or "q" to denote the side.
+            if movetype = "promotion", move must be a move tuple, and promoteto must be a Piece.
+            """
+            newboardposition = list(boardobject.position)
+            # Update pieceplacement
+            if movetype = "simple":
+                newboardposition[0][move[0][0]][move[0][1]] = None
+                newboardposition[0][move[1][0]][move[1][1]] = boardobject.MapPiece(move[0])
             
+            # Update sidetomove
+            if boardobject.sidetomove == 'w':
+                newboardposition[1] = 'b'
+            if boardobject.sidetomove == 'b':
+                newboardposition[1] = 'w'
             
+            # Update Castling Rights
+            #if movetype == "castle" PUT inside pieceplacement update.
             
-            pass
-        
+            # Update EP Square
+            #if isDoublePawnMove; create EP Square behind pawn.
+            
+            # Update Halfmoveclock
+            #if last move by pawn or capture, reset to 0
+            #else increment by 1
+            
+            # Update fullmove
+            #if now wtm; increment
+            
         pass
     
     def isMate(self):
