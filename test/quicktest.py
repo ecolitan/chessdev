@@ -27,12 +27,17 @@ def quicktest():
             
     def testgeneratemoves(position):
         test = BoardRelations(position)
-        _pre = PreSearch()
-        for i in PreSearch().GenerateBoards(test):
-            i.sidetomove
-            i.pieceplacement
+        
+        #print test.PossibleMoves(), len(test.PossibleMoves())
+        
+        PreSearch().GenerateBoards(test)
+        #for i in PreSearch().GenerateBoards(test):
+        #    print i.sidetomove
+            #print i.pieceplacement
+            #print
+        #print len(PreSearch().GenerateBoards(test))
             
-            
-    for position in [testpos1]:
+    #testpos1
+    for position in [startBoard]:
         #testpiecemoves(position)
         testgeneratemoves(position)

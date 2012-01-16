@@ -25,6 +25,7 @@ class PreSearch():
         """
         objectlist = []
         moveslist = boardobject.PossibleMoves()
+        #print moveslist, len(moveslist)
         castlelist = boardobject.PossibleCastle()
         
         def isPawnMove(move):
@@ -164,7 +165,9 @@ class PreSearch():
             return newboardposition
             
         #Generate the BoardRelations objects
+        #print moveslist, len(moveslist)
         for move in moveslist:
+            print move
             if not isPromotion(move):
                 _object = BoardRelations(createBoardPosition(move, 'simple'))
                 if _object.isLegal():
@@ -178,15 +181,18 @@ class PreSearch():
                     _object = BoardRelations(createBoardPosition(move, 'promotion', i))
                     if _object.isLegal():
                         objectlist.append(_object)
+            print len(objectlist)
         if castlelist[0] is True:
+            print "True0"
             _object = BoardRelations(createBoardPosition('k', 'castle'))
             if _object.isLegal():
                 objectlist.append(_object)
         if castlelist[1] is True:
+            print "True1"
             _object = BoardRelations(createBoardPosition('q', 'castle'))
             if _object.isLegal():
                 objectlist.append(_object)
-        
+
         return objectlist
     
     def isMate(self):
