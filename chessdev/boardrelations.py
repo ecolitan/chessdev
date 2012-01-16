@@ -469,9 +469,9 @@ class BoardRelations:
         """
         movelist = []
         
-        if colour == 'w':
+        if self.sidetomove == 'w':
             samecolour = whitepieces
-        if colour == 'b':
+        if self.sidetomove == 'b':
             samecolour = blackpieces
         
         for i in boardpos:
@@ -540,13 +540,13 @@ class BoardRelations:
             return True
         
         if self.sidetomove == 'w':
-            if self.isCheck((0,4)):
+            if self.isCheck((0,4), 'w'):
                 return [False,False]
             else:
                 return [wks(),wqs()]
             
         elif self.sidetomove == 'b':
-            if self.isCheck((7,4)):
+            if self.isCheck((7,4), 'b'):
                 return [False,False]
             else:
                 return [bks(),bqs()]
@@ -558,16 +558,14 @@ class BoardRelations:
         Accepts a square tuple, and a colour string.
         Returns True or False.
         """
-        if colour == 'w':
+        if self.sidetomove == 'w':
             enemypieces = blackpieces
-        if colour == 'b':
+        if self.sidetomove == 'b':
             enemypieces = whitepieces
-        else:
-            raise DeadlyError('InvalidStringInput')
             
         for i in boardpos:
-            if boardobject.MapPiece(i) in enemypieces:
-                if square in boardobject.PossibleSquares(i):
+            if self.MapPiece(i) in enemypieces:
+                if square in self.PossibleSquares(i):
                     return True
         return False
             
@@ -583,6 +581,6 @@ class BoardRelations:
             otherking = self.FindPieces('K')
             waitcolour = 'w'
         
-        if isCheck(otherking, waitcolour):
+        if self.isCheck(otherking, waitcolour):
             return False
         return True

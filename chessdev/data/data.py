@@ -31,6 +31,8 @@ testpos1 = [[['R', None, 'B', 'Q', 'R', None, 'K', None],
 piecetypes = ['R', 'N', 'B', 'Q', 'K', 'P', 'r', 'n', 'b', 'q', 'k', 'p']
 whitepieces = ['R', 'N', 'B', 'Q', 'K', 'P']
 blackpieces = ['r', 'n', 'b', 'q', 'k', 'p']
+whitepromotions = ['R', 'N', 'B', 'Q']
+blackpromotions = ['r', 'n', 'b', 'q']
 
 boardpos = [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7),
             (1, 0), (1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7),

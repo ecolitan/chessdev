@@ -2,19 +2,7 @@ Test suite
 
 Legal moves are moves which result in a legal position.
 
-Is a square check?
-    Look at all possible moves for all enemy pieces, if square in list, square is check.
-    
-Is a position Legal?
-    Number of Kings.
-    Both kings not in check.
-    Enemy king cannot be captured (would imply did not move out of check previous turn)
-    
-Is a position Mate?
-    King square in check, and after all possible moves King square in check.
-    
-Is a position Stalemate?
-    Zero possible legal moves.
+Create hash of a position to compare later, avoid repeat analysis.
 
 Pawn promotion.
 Castling.
