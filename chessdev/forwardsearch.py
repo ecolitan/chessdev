@@ -25,7 +25,6 @@ class PreSearch():
         """
         objectlist = []
         moveslist = boardobject.PossibleMoves()
-        #print moveslist, len(moveslist)
         castlelist = boardobject.PossibleCastle()
         
         def isPawnMove(move):
@@ -76,6 +75,7 @@ class PreSearch():
             if movetype = "castle", move must be either "k" or "q" to denote the side.
             if movetype = "promotion", move must be a move tuple, and promoteto must be a Piece.
             """
+            #TODO treat castling as a simple move, just look if king is moving two squares. 
             newboardposition = list(boardobject.position)
             # Update pieceplacement
             if movetype == "simple":
@@ -165,9 +165,7 @@ class PreSearch():
             return newboardposition
             
         #Generate the BoardRelations objects
-        #print moveslist, len(moveslist)
         for move in moveslist:
-            print move
             if not isPromotion(move):
                 _object = BoardRelations(createBoardPosition(move, 'simple'))
                 if _object.isLegal():
@@ -181,18 +179,16 @@ class PreSearch():
                     _object = BoardRelations(createBoardPosition(move, 'promotion', i))
                     if _object.isLegal():
                         objectlist.append(_object)
-            print len(objectlist)
+        # TODO modify to give castle as a simple move where king just goes to destination square.
         if castlelist[0] is True:
-            print "True0"
             _object = BoardRelations(createBoardPosition('k', 'castle'))
             if _object.isLegal():
                 objectlist.append(_object)
         if castlelist[1] is True:
-            print "True1"
             _object = BoardRelations(createBoardPosition('q', 'castle'))
             if _object.isLegal():
                 objectlist.append(_object)
-
+            
         return objectlist
     
     def isMate(self):

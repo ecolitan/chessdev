@@ -1,5 +1,6 @@
 from chessdev.boardrelations import BoardRelations
 from chessdev.forwardsearch import PreSearch
+from chessdev.basicwrapper import BasicWrapper
 
 #from test2 import Test2
 
@@ -27,17 +28,17 @@ def quicktest():
             
     def testgeneratemoves(position):
         test = BoardRelations(position)
-        
         #print test.PossibleMoves(), len(test.PossibleMoves())
         
-        PreSearch().GenerateBoards(test)
-        #for i in PreSearch().GenerateBoards(test):
-        #    print i.sidetomove
-            #print i.pieceplacement
-            #print
-        #print len(PreSearch().GenerateBoards(test))
+        
             
+    def testwrapper(position):
+        testobject = BoardRelations(position)
+        BasicWrapper().PrintBoard(testobject)
+        
+        
     #testpos1
     for position in [startBoard]:
         #testpiecemoves(position)
-        testgeneratemoves(position)
+        #testgeneratemoves(position)
+        testwrapper(position)
