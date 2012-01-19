@@ -8,25 +8,11 @@ class PreSearch():
     def __init__(self):
         pass
     
-    def GenerateBoards(self, boardobject):
-        """Returns a List of BoardRelations objects, showing all possible legal positions arising from a given boardobject.
-        Boardobjects created must be for:
-            all possible moves
-            after castling if possible
-            after EP capture if possible
-            after all possible promotions
-        Important to update in position:
-            EP Square created
-            Castling rights changed
-            increment or reset halfmoveclock
-            increment fullmoves
-            update sidetomove
-        Return List
+    def GenerateBoard(self, boardobject, move, promoteto=None):
+        """Returns legal BoardRelations object for a given move.
+        If move is not Legal, return Error
+        Return BoardRelations Object
         """
-        objectlist = []
-        moveslist = boardobject.PossibleMoves()
-        castlelist = boardobject.PossibleCastle()
-        
         def isPawnMove(move):
             """Check if a move is a pawn move.
             Return True or False.
@@ -69,21 +55,38 @@ class PreSearch():
                 return False
             return True
         
-        def createBoardPosition(move, movetype, promoteto=None):
+        def createBoardPosition(move, promoteto=None):
             """Create a new boardposition.
-            if movetype = "simple", move must be a move tuple.
-            if movetype = "castle", move must be either "k" or "q" to denote the side.
-            if movetype = "promotion", move must be a move tuple, and promoteto must be a Piece.
+            Accept move tuple and optional promotion piece.
+            return boardposition as list.
             """
-            #TODO treat castling as a simple move, just look if king is moving two squares. 
+            # Check if move is castling.
+            if isKingMove(move):
+                if (move[0] in [(0,4),(7,4)] and move[1] in [(0,6),(7,6)]):
+                    movetype = 'castle'
+                    cside = 'k'
+                elif (move[0] in [(0,4),(7,4)] and move[1] in [(0,2),(7,2)]):
+                    movetype = 'castle'
+                    cside = 'q'
+            # Check if move is promotion.
+            elif isPromotion(move):
+                movetype = 'promotion'
+                if promoteto is None:
+                    if boardobject.sidetomove == 'w':
+                        promoteto = 'Q'
+                    if boardobject.sidetomove == 'b':
+                        promoteto = 'q'
+            # Otherwise its just a simple move.
+            else:
+                movetype = 'simple'
+            
             newboardposition = list(boardobject.position)
             # Update pieceplacement
             if movetype == "simple":
                 newboardposition[0][move[0][0]][move[0][1]] = None
                 newboardposition[0][move[1][0]][move[1][1]] = boardobject.MapPiece(move[0])
-                
             if movetype == "castle":
-                if move == "k":
+                if cside == "k":
                     if boardobject.sidetomove == 'w':
                         #white kingside castle
                         newboardposition[0][0][4] = None
@@ -96,7 +99,7 @@ class PreSearch():
                         newboardposition[0][7][7] = None
                         newboardposition[0][7][5] = 'R'
                         newboardposition[0][7][6] = 'K'
-                if move == "q":
+                if cside == "q":
                     if boardobject.sidetomove == 'w':
                         #white queenside castle
                         newboardposition[0][0][4] = None
@@ -109,7 +112,6 @@ class PreSearch():
                         newboardposition[0][7][0] = None
                         newboardposition[0][7][3] = 'R'
                         newboardposition[0][7][2] = 'K'
-                        
             if movetype == "promotion":
                 newboardposition[0][move[0][0]][move[0][1]] = None
                 newboardposition[0][move[1][0]][move[1][1]] = promoteto
@@ -164,8 +166,23 @@ class PreSearch():
             
             return newboardposition
             
-        #Generate the BoardRelations objects
+        # Generate the BoardRelations object
+        return BoardRelations(createBoardPosition(move, promoteto))
+        
+    def GenerateAllBoards(self, boardobject):
+        """Generate a list of all legal BoardRelations objects for a given boardobject.
+        Accepts BoardRelations object
+        Returns List of BoardRelations objects
+        """
+        objectlist = []
+        moveslist = boardobject.PossibleMoves()
+        castlelist = boardobject.PossibleCastle()
+        
         for move in moveslist:
+            #TODO 
+            
+            
+            
             if not isPromotion(move):
                 _object = BoardRelations(createBoardPosition(move, 'simple'))
                 if _object.isLegal():
@@ -179,7 +196,7 @@ class PreSearch():
                     _object = BoardRelations(createBoardPosition(move, 'promotion', i))
                     if _object.isLegal():
                         objectlist.append(_object)
-        # TODO modify to give castle as a simple move where king just goes to destination square.
+
         if castlelist[0] is True:
             _object = BoardRelations(createBoardPosition('k', 'castle'))
             if _object.isLegal():
@@ -190,7 +207,8 @@ class PreSearch():
                 objectlist.append(_object)
             
         return objectlist
-    
+        
+        
     def isMate(self):
         """Returns True or False for if a position is a checkmate.
             if king in check AND

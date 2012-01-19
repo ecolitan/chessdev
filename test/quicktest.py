@@ -35,7 +35,7 @@ def quicktest():
     def testwrapper(position):
         testobject = BoardRelations(position)
         BasicWrapper().PrintBoard(testobject)
-        
+        BasicWrapper().InputMove()
         
     #testpos1
     for position in [startBoard]:

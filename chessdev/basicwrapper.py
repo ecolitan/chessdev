@@ -34,7 +34,8 @@ class BasicWrapper():
         e.g. h7 h8 Q
         """
         def convert_move(alg_move):
-            _hmap = {'a':0,'b':1,'c':2,'d':3,'e':4,'f':5,'g':6,'h:7'}
+            #import pdb; pdb.set_trace()
+            _hmap = {'a':0,'b':1,'c':2,'d':3,'e':4,'f':5,'g':6,'h':7}
             _vmap = {1:0,2:1,3:2,4:3,5:4,6:6,7:6,8:7}
             _lmove = list(alg_move)
 
@@ -81,7 +82,9 @@ class BasicWrapper():
 
         
     def CreateNewBoard(self, boardobject, move):
-        """Creates a new Boardobject based on the given move.
+        """Creates a new Boardobject based on and existing Boardobject and a given move.
         Returns BoardObject
         """
+        # Check that move is in moveslist for position.
+        
         pass
