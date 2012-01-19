@@ -178,34 +178,32 @@ class PreSearch():
         moveslist = boardobject.PossibleMoves()
         castlelist = boardobject.PossibleCastle()
         
+        if castlelist[0] is True:
+            if boardobject.sidetomove == 'w':
+                moveslist.append(((0,4),(0,6)))
+            if boardobject.sidetomove == 'b':
+                moveslist.append(((7,4),(7,6)))
+        if castlelist[1] is True:
+            if boardobject.sidetomove == 'w':
+                moveslist.append(((0,4),(0,2)))
+            if boardobject.sidetomove == 'b':
+                moveslist.append(((7,4),(7,2)))
+                
         for move in moveslist:
-            #TODO 
-            
-            
-            
-            if not isPromotion(move):
-                _object = BoardRelations(createBoardPosition(move, 'simple'))
-                if _object.isLegal():
-                    objectlist.append(_object)
-            if isPromotion(move):
+            if self.GenerateBoard(boardobject, move).isPromotion(move):
                 if boardobject.sidetomove == 'w':
                     promotions = whitepromotions
                 if boardobject.sidetomove == 'b':
                     promotions = blackpromotions
-                for i in promotions:
-                    _object = BoardRelations(createBoardPosition(move, 'promotion', i))
+                for promotionpiece in promotions:
+                    _object = BoardRelations(self.GenerateBoard(boardobject,move,promotionpiece))
                     if _object.isLegal():
                         objectlist.append(_object)
+            else:
+                _object = BoardRelations(self.GenerateBoard(boardobject,move,promotionpiece))
+                if _object.isLegal():
+                    objectlist.append(_object)
 
-        if castlelist[0] is True:
-            _object = BoardRelations(createBoardPosition('k', 'castle'))
-            if _object.isLegal():
-                objectlist.append(_object)
-        if castlelist[1] is True:
-            _object = BoardRelations(createBoardPosition('q', 'castle'))
-            if _object.isLegal():
-                objectlist.append(_object)
-            
         return objectlist
         
         

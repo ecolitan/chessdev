@@ -1,3 +1,5 @@
+import sys
+
 from chessdev.boardrelations import BoardRelations
 from chessdev.forwardsearch import PreSearch
 from chessdev.data.data import *
@@ -28,19 +30,18 @@ class BasicWrapper():
         """
         
         prompt = """Input your move as start and destination square.
-        If castling simply input the start square and the desination square for the king.
-        e.g. e1 g1
-        For pawn promotion, give the move, followed by the piece to promote to.
-        e.g. h7 h8 Q
-        """
+If castling simply input the start square and the desination square for the king.
+e.g. e1 g1
+For pawn promotion, give the move, followed by the piece to promote to.
+e.g. h7 h8 Q
+"""
         def convert_move(alg_move):
             #import pdb; pdb.set_trace()
             _hmap = {'a':0,'b':1,'c':2,'d':3,'e':4,'f':5,'g':6,'h':7}
-            _vmap = {1:0,2:1,3:2,4:3,5:4,6:6,7:6,8:7}
+            _vmap = {'1':0,'2':1,'3':2,'4':3,'5':4,'6':6,'7':6,'8':7}
             _lmove = list(alg_move)
-
             chars = len(_lmove)
-            if chars in [5,7]:
+            if chars not in [5,7]:
                 print "Invalid move entry!"
                 return None
             if _lmove[0] not in _hmap:
@@ -75,16 +76,11 @@ class BasicWrapper():
             return ((square1,square2), promotepiece)
             
         raw_move = raw_input(prompt)
-        if convert_move(raw_move) is None:
+        while convert_move(raw_move) is None:
             raw_move = raw_input(prompt)
+            if raw_move in ["exit","quit"]:
+                sys.exit(0)
         
         return convert_move(raw_move)
 
         
-    def CreateNewBoard(self, boardobject, move):
-        """Creates a new Boardobject based on and existing Boardobject and a given move.
-        Returns BoardObject
-        """
-        # Check that move is in moveslist for position.
-        
-        pass

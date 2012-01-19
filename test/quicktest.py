@@ -30,12 +30,12 @@ def quicktest():
         test = BoardRelations(position)
         #print test.PossibleMoves(), len(test.PossibleMoves())
         
-        
-            
     def testwrapper(position):
         testobject = BoardRelations(position)
         BasicWrapper().PrintBoard(testobject)
-        BasicWrapper().InputMove()
+        fullmove = BasicWrapper().InputMove()
+        print fullmove
+        newobject = PreSearch.GenerateBoard(testobject, fullmove[0], fullmove[1])
         
     #testpos1
     for position in [startBoard]:
