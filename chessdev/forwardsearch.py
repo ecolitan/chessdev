@@ -1,3 +1,4 @@
+import copy
 from chessdev.data.data import *
 from chessdev.customexceptions import *
 from chessdev.boardrelations import *
@@ -13,6 +14,13 @@ class PreSearch():
         If move is not Legal, return Error
         Return BoardRelations Object
         """
+        def isOurPiece(move):
+            """Check that piece being moved is ours.
+            Return True or False
+            """
+            #TODO
+            return True
+            
         def isPawnMove(move):
             """Check if a move is a pawn move.
             Return True or False.
@@ -61,13 +69,12 @@ class PreSearch():
             return boardposition as list.
             """
             # Check if move is castling.
-            if isKingMove(move):
-                if (move[0] in [(0,4),(7,4)] and move[1] in [(0,6),(7,6)]):
-                    movetype = 'castle'
-                    cside = 'k'
-                elif (move[0] in [(0,4),(7,4)] and move[1] in [(0,2),(7,2)]):
-                    movetype = 'castle'
-                    cside = 'q'
+            if (isKingMove(move) and (move[0] in [(0,4),(7,4)] and move[1] in [(0,6),(7,6)])):
+                movetype = 'castle'
+                cside = 'k'
+            elif (isKingMove(move) and (move[0] in [(0,4),(7,4)] and move[1] in [(0,2),(7,2)])):
+                movetype = 'castle'
+                cside = 'q'
             # Check if move is promotion.
             elif isPromotion(move):
                 movetype = 'promotion'
@@ -80,7 +87,10 @@ class PreSearch():
             else:
                 movetype = 'simple'
             
-            newboardposition = list(boardobject.position)
+            # Copy the position
+            #newboardposition = list(boardobject.position)
+            newboardposition = copy.deepcopy(boardobject.position)
+
             # Update pieceplacement
             if movetype == "simple":
                 newboardposition[0][move[0][0]][move[0][1]] = None
@@ -165,9 +175,14 @@ class PreSearch():
                 newboardposition[5] += 1
             
             return newboardposition
-            
+        
+        if not isOurPiece(move):
+            raise DeadlyError(None,"not side to move")
+        
         # Generate the BoardRelations object
-        return BoardRelations(createBoardPosition(move, promoteto))
+        newposition = createBoardPosition(move, promoteto)
+        newobj = BoardRelations(newposition)
+        return newobj
         
     def GenerateAllBoards(self, boardobject):
         """Generate a list of all legal BoardRelations objects for a given boardobject.

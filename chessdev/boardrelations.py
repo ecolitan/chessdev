@@ -277,7 +277,6 @@ class BoardRelations:
         return squares
         
     def KingSquares(self, square):
-        #TODO Castling?
         """Returns a list of possible squares for a king to move to.
         Doesn't worry about check, only that the square is not occupied by a piece of the same colour.
         Accepts square Tuple.
@@ -294,7 +293,6 @@ class BoardRelations:
         return squares
         
     def KnightSquares(self, square):
-        #TODO Untested
         """Returns a list of possible moves for a knight to move to.
         Don't worry about check, only that the square is not occupied by a piece of the same colour.
         Accepts square Tuple.
@@ -343,11 +341,13 @@ class BoardRelations:
         if self.MapPiece(square) == 'P':
             if n == 1:
                 unmoved = True
+            # Straight pawn push
             if self.MapPiece((n+1,m)) is None:
                 squares.append((n+1,m))
                 if unmoved is True:
                     if self.MapPiece((n+2,m)) is None:
                         squares.append((n+2,m))
+            # Pawn Captures
             if m+1 != 8:
                 if (self.MapPiece((n+1,m+1)) not in samecolour and self.MapPiece((n+1,m+1)) is not None):
                     squares.append((n+1,m+1))
@@ -447,6 +447,7 @@ class BoardRelations:
         squares = []
         if self.MapPiece(square) == None:
             pass
+            #TODO Sensible errors for this type of thing.
         elif self.MapPiece(square) in ['R', 'r']:
             squares = self.RookSquares(square)
         elif self.MapPiece(square) in ['N', 'n']:

@@ -29,6 +29,7 @@ class BasicWrapper():
         return [(square1, square2), promotepiece]
         """
         
+        shortprompt = """-> """
         prompt = """Input your move as start and destination square.
 If castling simply input the start square and the desination square for the king.
 e.g. e1 g1
@@ -74,13 +75,55 @@ e.g. h7 h8 Q
             else:
                 promotepiece = None
             return ((square1,square2), promotepiece)
-            
-        raw_move = raw_input(prompt)
+        
+        raw_move = raw_input(shortprompt)
+        if raw_move in ["exit","quit"]:
+            sys.exit(0)
+        if raw_move == "debug":
+            return raw_move
         while convert_move(raw_move) is None:
             raw_move = raw_input(prompt)
             if raw_move in ["exit","quit"]:
                 sys.exit(0)
-        
+            if raw_move == "debug":
+                return raw_move
         return convert_move(raw_move)
 
+class SimpleGame():
+    """Interface to play a simple cli game."""
+    
+    def __init__(self):
+        pass
         
+    def CreateGame(self, gamestartpos, playmode=None, human=None):
+        """Create a game from a starting position.
+        Accepts start position as list.
+        Accepts playmode as a string
+        playmode is either "hh,hc,cc" human-human, human-computer, computer-computer
+        If playmode is hc, human must be either "w" or "b" to indicate what colour the human is playing.
+        Game continues until an error or mate.
+        """
+        currentobject = BoardRelations(gamestartpos)
+        if not currentobject.isLegal():
+            sys.exit("Invalid starting position")
+        
+        #TODO Test and play various playmodes 
+                
+        # human-human
+        debugobjects = []
+        BasicWrapper().PrintBoard(currentobject)
+        while True:
+            fullmove = BasicWrapper().InputMove()
+            # Move given must be in the list of possible moves for a position and create a legal position
+            if fullmove == "debug":
+                print debugobjects
+                sys.exit(0)
+            if fullmove[0] not in currentobject.PossibleMoves():
+                print "Illegal move!"
+                print fullmove[0]
+                print currentobject.PossibleSquares(fullmove[0][0])
+                sys.exit(1)
+            currentobject = PreSearch().GenerateBoard(currentobject, fullmove[0], fullmove[1])
+            BasicWrapper().PrintBoard(currentobject)
+            debugobjects.append(currentobject)
+            
