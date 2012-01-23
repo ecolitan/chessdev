@@ -104,13 +104,7 @@ class SimpleGame():
         Game continues until an error or mate.
         """
         currentobject = BoardRelations(gamestartpos)
-        
-        #print currentobject.position
-        #print
-        #print currentobject.PossibleMoves()
-        #print
-        
-        #sys.exit(0)
+
         if not currentobject.isLegal():
             sys.exit("Invalid starting position")
         
@@ -122,9 +116,6 @@ class SimpleGame():
         while True:
             fullmove = BasicWrapper().InputMove()
             
-            #print fullmove
-            #print
-            
             # Move given must be in the list of possible moves for a position and create a legal position
             
             if fullmove[0][1] not in currentobject.PossibleSquares(fullmove[0][0]):
@@ -134,10 +125,12 @@ class SimpleGame():
                 sys.exit(1)
             
             currentobject = PreSearch().GenerateBoard(currentobject, fullmove[0], fullmove[1])
-            BasicWrapper().PrintBoard(currentobject)
+            if PreSearch().isMate(currentobject)
+                print "Checkmate"
+                break
             
-            #print currentobject.position
-            #print
-            #print currentobject.PossibleMoves()
-            #print
+            
+            
+            BasicWrapper().PrintBoard(currentobject)
+
             

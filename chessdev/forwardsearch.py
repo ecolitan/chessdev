@@ -222,23 +222,23 @@ class PreSearch():
         return objectlist
         
         
-    def isMate(self):
+    def isMate(self, boardobject):
         """Returns True or False for if a position is a checkmate.
-            if king in check AND
-                every possible move creates a position where the king is still in check.
+        If king in check AND
+            every possible move creates a position where the king is still in check.
         Returns True or False.
         """
-        if self.sidetomove == 'w':
-            kingsquare = self.FindPieces('K')
-        elif self.sidetomove == 'b':
-            kingsquare = self.FindPieces('k')
+        if boardobject.sidetomove == 'w':
+            kingsquare = boardobject.FindPieces('K')
+        elif boardobject.sidetomove == 'b':
+            kingsquare = boardobject.FindPieces('k')
         
-        if not self.isCheck(kingsquare):
+        if not boardobject.isCheck(kingsquare):
             return False
         
-        for square in self.KingSquares(kingsquare):
-            if not isCheck(square, self.sidetomove):
-                return False      
+        for square in boardobject.KingSquares(kingsquare):
+            if not isCheck(square, boardobject.sidetomove):
+                return False
             #TODO
 
     def isStale(self):
