@@ -52,3 +52,15 @@ def quicktest():
         pass
     
     SimpleGame().CreateGame(startBoard)
+    
+    #obj1=BoardRelations(testpos2)
+    #print obj1.PossibleMoves()
+    #print
+    #for i in boardpos:
+    #    print
+    #    print i
+    #    print obj1.MapPiece(i)
+    #    print obj1.PossibleSquares(i)
+    #    if obj1.MapPiece(i) in ['P', 'p']:
+    #        print "pawnsquare method ", obj1.PawnSquares(i)
+    #    print obj1.PossibleCaptures(i)

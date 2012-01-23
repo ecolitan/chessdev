@@ -1,8 +1,7 @@
 Test suite
 
-Legal moves are moves which result in a legal position.
-
 Create hash of a position to compare later, avoid repeat analysis.
+Hash table lookup of positions
 
 Pawn promotion.
 Castling.

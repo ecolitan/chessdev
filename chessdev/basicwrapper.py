@@ -1,5 +1,5 @@
 import sys
-
+import copy
 from chessdev.boardrelations import BoardRelations
 from chessdev.forwardsearch import PreSearch
 from chessdev.data.data import *
@@ -14,7 +14,7 @@ class BasicWrapper():
         """Print the position of a boardobject to stdout.
         Make it look like a board.
         """
-        _position = list(boardobject.pieceplacement) 
+        _position = copy.deepcopy(boardobject.pieceplacement) 
         for square in boardpos:
             if _position[square[0]][square[1]] is None:
                 _position[square[0]][square[1]] = ' '
@@ -39,7 +39,7 @@ e.g. h7 h8 Q
         def convert_move(alg_move):
             #import pdb; pdb.set_trace()
             _hmap = {'a':0,'b':1,'c':2,'d':3,'e':4,'f':5,'g':6,'h':7}
-            _vmap = {'1':0,'2':1,'3':2,'4':3,'5':4,'6':6,'7':6,'8':7}
+            _vmap = {'1':0,'2':1,'3':2,'4':3,'5':4,'6':5,'7':6,'8':7}
             _lmove = list(alg_move)
             chars = len(_lmove)
             if chars not in [5,7]:
@@ -104,26 +104,40 @@ class SimpleGame():
         Game continues until an error or mate.
         """
         currentobject = BoardRelations(gamestartpos)
+        
+        #print currentobject.position
+        #print
+        #print currentobject.PossibleMoves()
+        #print
+        
+        #sys.exit(0)
         if not currentobject.isLegal():
             sys.exit("Invalid starting position")
         
         #TODO Test and play various playmodes 
                 
         # human-human
-        debugobjects = []
         BasicWrapper().PrintBoard(currentobject)
+        
         while True:
             fullmove = BasicWrapper().InputMove()
+            
+            #print fullmove
+            #print
+            
             # Move given must be in the list of possible moves for a position and create a legal position
-            if fullmove == "debug":
-                print debugobjects
-                sys.exit(0)
-            if fullmove[0] not in currentobject.PossibleMoves():
+            
+            if fullmove[0][1] not in currentobject.PossibleSquares(fullmove[0][0]):
                 print "Illegal move!"
                 print fullmove[0]
                 print currentobject.PossibleSquares(fullmove[0][0])
                 sys.exit(1)
+            
             currentobject = PreSearch().GenerateBoard(currentobject, fullmove[0], fullmove[1])
             BasicWrapper().PrintBoard(currentobject)
-            debugobjects.append(currentobject)
+            
+            #print currentobject.position
+            #print
+            #print currentobject.PossibleMoves()
+            #print
             
