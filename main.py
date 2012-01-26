@@ -3,10 +3,15 @@
 import sys
 import profile
 import time
+import Queue
 from test import *
 
 def main():
-    """Documentation string here."""
+    """main"""
+    
+    #Incoming commands must be processed my main thread
+    incoming_commands = Queue.Queue()
+    
     
     #some testing
     quicktest()
