@@ -35,9 +35,9 @@ class BasicWrapper():
         shortprompt = """-> """
         prompt = """Input your move as start and destination square.
 If castling simply input the start square and the desination square for the king.
-e.g. e1 g1
+e.g. e1g1
 For pawn promotion, give the move, followed by the piece to promote to.
-e.g. h7 h8 Q
+e.g. h7h8Q
 """
         def convert_move(alg_move):
             #import pdb; pdb.set_trace()
@@ -128,7 +128,7 @@ class SimpleGame():
                 sys.exit(1)
             
             currentobject = PreSearch().GenerateBoard(currentobject, fullmove[0], fullmove[1])
-            if PreSearch().isMate(currentobject)
+            if PreSearch().isMate(currentobject):
                 print "Checkmate"
                 break
             
@@ -153,3 +153,4 @@ class ListenStdin(threading.Thread):
         while True:
             new_command = raw_input()
             incoming_commands.put(new_command)
+        #TODO needs a condition to break! mustnt outlive main.
