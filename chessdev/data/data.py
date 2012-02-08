@@ -45,3 +45,17 @@ boardpos = [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7),
 
 
 testpos2=[[['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'], ['P', 'P', None, 'P', 'P', 'P', 'P', 'P'], [None, None, None, None, None, None, None, None], [None, None, 'P', None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'], ['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r']], 'b', [True, True, True, True], None, 0, 0]
+
+# http://home.hccnet.nl/h.g.muller/engine-intf.html#8
+valid_commands = ['xboard', 'protover N', 'accepted', 'rejected', 'new', 'quit', 'force', 'go', 'level MPS BASE INC', 'st TIME', 'sd DEPTH', ]
+
+
+
+
+
+
+
+
+
+
+

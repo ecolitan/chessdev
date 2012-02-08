@@ -28,6 +28,13 @@ class BasicWrapper():
         
     def InputMove(self):
         """Wait for player to input a move.
+        
+        When xboard sends your engine a move, it normally sends coordinate algebraic notation. Examples:
+
+        Normal moves:	e2e4
+        Pawn promotion:	e7e8q
+        Castling:	e1g1, e1c1, e8g8, e8c8
+
         returns move as list
         return [(square1, square2), promotepiece]
         """
@@ -35,17 +42,18 @@ class BasicWrapper():
         shortprompt = """-> """
         prompt = """Input your move as start and destination square.
 If castling simply input the start square and the desination square for the king.
-e.g. e1 g1
+e.g. e1g1
 For pawn promotion, give the move, followed by the piece to promote to.
-e.g. h7 h8 Q
+e.g. h7h8q
 """
+#TODO Fix coordinate notation 
         def convert_move(alg_move):
             #import pdb; pdb.set_trace()
             _hmap = {'a':0,'b':1,'c':2,'d':3,'e':4,'f':5,'g':6,'h':7}
             _vmap = {'1':0,'2':1,'3':2,'4':3,'5':4,'6':5,'7':6,'8':7}
             _lmove = list(alg_move)
             chars = len(_lmove)
-            if chars not in [5,7]:
+            if chars not in [4,5]:
                 print "Invalid move entry!"
                 return None
             if _lmove[0] not in _hmap:
@@ -54,27 +62,21 @@ e.g. h7 h8 Q
             if _lmove[1] not in _vmap:
                 print "Invalid move entry!"
                 return None
-            if _lmove[2] is not ' ':
+            if _lmove[2] not in _hmap:
                 print "Invalid move entry!"
                 return None
-            if _lmove[3] not in _hmap:
+            if _lmove[3] not in _vmap:
                 print "Invalid move entry!"
                 return None
-            if _lmove[4] not in _vmap:
-                print "Invalid move entry!"
-                return None
-            if chars == 7:
-                if _lmove[5] is not ' ':
-                    print "Invalid move entry!"
-                    return None
-                if (_lmove[6] not in whitepromotions or _lmove[6] not in blackpromotions):
+            if chars == 5:
+                if (_lmove[4] not in whitepromotions or _lmove[4] not in blackpromotions):
                     print "Invalid move entry!"
                     return None
                
             square1 = (_vmap[_lmove[1]],_hmap[_lmove[0]])
-            square2 = (_vmap[_lmove[4]],_hmap[_lmove[3]])
+            square2 = (_vmap[_lmove[3]],_hmap[_lmove[2]])
             if chars == 7:
-                promotepiece = _lmove[6]
+                promotepiece = _lmove[4]
             else:
                 promotepiece = None
             return ((square1,square2), promotepiece)
@@ -128,7 +130,7 @@ class SimpleGame():
                 sys.exit(1)
             
             currentobject = PreSearch().GenerateBoard(currentobject, fullmove[0], fullmove[1])
-            if PreSearch().isMate(currentobject)
+            if PreSearch().isMate(currentobject):
                 print "Checkmate"
                 break
             
@@ -146,6 +148,7 @@ class CecpWrapper():
         If valid, Return
         Returns String or None"""
         pass
+        
 
 class ListenStdin(threading.Thread):
     """Listen on stdin for commands and add them to the incoming_commands Queue."""
