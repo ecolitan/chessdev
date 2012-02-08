@@ -44,7 +44,11 @@ class BasicWrapper():
 If castling simply input the start square and the desination square for the king.
 e.g. e1g1
 For pawn promotion, give the move, followed by the piece to promote to.
+<<<<<<< HEAD
 e.g. h7h8q
+=======
+e.g. h7h8Q
+>>>>>>> 8a02754587dab8a65c4c7687561bef6d8eaf44aa
 """
 #TODO Fix coordinate notation 
         def convert_move(alg_move):
@@ -156,3 +160,4 @@ class ListenStdin(threading.Thread):
         while True:
             new_command = raw_input()
             incoming_commands.put(new_command)
+        #TODO needs a condition to break! mustnt outlive main.

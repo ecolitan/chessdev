@@ -18,7 +18,7 @@ class PreSearch():
             """Check that piece being moved is ours.
             Return True or False
             """
-            #TODO
+            #TODO write isOurPiece method
             return True
             
         def isPawnMove(move):
@@ -233,13 +233,13 @@ class PreSearch():
         elif boardobject.sidetomove == 'b':
             kingsquare = boardobject.FindPieces('k')
         
-        if not boardobject.isCheck(kingsquare):
+        if not boardobject.isCheck(kingsquare, boardobject.sidetomove):
             return False
         
         for square in boardobject.KingSquares(kingsquare):
             if not isCheck(square, boardobject.sidetomove):
                 return False
-            #TODO
+            #TODO finish isMate method
 
     def isStale(self):
         """Returns True or False for if a position is a stalemate.
@@ -247,4 +247,4 @@ class PreSearch():
             if there are no legal moves
         Returns True or False."""
         return False
-        #TODO
+        #TODO finish isStale method
