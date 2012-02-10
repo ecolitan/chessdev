@@ -1,3 +1,5 @@
+import re
+
 emptyBoard = [[[None, None, None, None, None, None, None, None],
                [None, None, None, None, None, None, None, None],
                [None, None, None, None, None, None, None, None],
@@ -47,7 +49,56 @@ boardpos = [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7),
 testpos2=[[['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'], ['P', 'P', None, 'P', 'P', 'P', 'P', 'P'], [None, None, None, None, None, None, None, None], [None, None, 'P', None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'], ['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r']], 'b', [True, True, True, True], None, 0, 0]
 
 # http://home.hccnet.nl/h.g.muller/engine-intf.html#8
-valid_commands = ['xboard', 'protover N', 'accepted', 'rejected', 'new', 'quit', 'force', 'go', 'level MPS BASE INC', 'st TIME', 'sd DEPTH', ]
+valid_commands = ['xboard',
+                'protover',                 # 'protover N',
+                'accepted',
+                'rejected',
+                'new',
+                'quit',
+                'force',
+                'go',
+                'level',                    # 'level MPS BASE INC',
+                'st',                       # 'st TIME',
+                'sd',                       # 'sd DEPTH',
+                'variant',                  # 'variant VARNAME',
+                'random',
+                'playother',
+                'nps',                      # 'nps NODE_RATE',
+                'time',                     # 'time N',
+                'otim',                     # 'otim N',
+                'usermove',                 # 'usermove MOVE',
+                '?',
+                'ping',
+                'draw',
+                'result',                   # 'result RESULT {COMMENT}',
+                'setboard',                 # 'setboard FEN',
+                'edit',
+                'hint',
+                'bk',
+                'undo',
+                'remove',
+                'hard',
+                'easy',
+                'post',
+                'nopost',
+                'analyze',
+                'name',                     # 'name X',
+                'rating',
+                'ics',                      # 'ics HOSTNAME',
+                'computer',
+                'pause',
+                'resume',
+                'memory',                   # 'memory N',
+                'cores',                    # 'cores N',
+                'egtpath',                  # 'egtpath TYPE PATH',
+                'option',                   # 'option NAME[=VALUE]',
+                ]
+
+valid_move_input = r"""([abcdefgh][1-8]){2}([qrbn])?"""
+valid_move_input_obj = re.compile(valid_move_input)
+
+
+
 
 
 

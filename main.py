@@ -5,6 +5,7 @@ import profile
 import time
 import Queue
 from test import *
+from chessdev.socktest import *
 
 def main():
     """main"""
@@ -14,7 +15,14 @@ def main():
     
     
     #some testing
-    quicktest()
+    #quicktest()
+    collect_incoming_data = CollectInput()
+    collect_incoming_data.start()
+    while True:
+        CecpWrapper().GetComands()
+    #collect_incoming_data.stop()
+    #input_queue.task_done()
+    #collect_incoming_data.join()
 
 num_runs = 100000
 
@@ -26,8 +34,8 @@ if __name__ == '__main__':
     
     main()
     
-    simple_time = (time.time() - start_time)/num_runs
+    #simple_time = (time.time() - start_time)/num_runs
     #print simple_time, "seconds per run"
-    print 1/simple_time, "NPS"
+    #print 1/simple_time, "NPS"
     
     #profile.run('main()')

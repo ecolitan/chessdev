@@ -139,25 +139,3 @@ class SimpleGame():
                 break
             
             BasicWrapper().PrintBoard(currentobject)
-
-class CecpWrapper():
-    """Implement the Chess Engine Communication Protocol (CECP)"""
-    #TODO I've never written a communication protocol before?? Where do I start
-    def __init__(self):
-        pass
-        
-    def GetComands(self, socket=None):
-        """Poll incoming_commands Queue and parse if the command is valid.
-        If not valid, write appropriate response to stdout
-        If valid, Return
-        Returns String or None"""
-        pass
-        
-
-class ListenStdin(threading.Thread):
-    """Listen on stdin for commands and add them to the incoming_commands Queue."""
-    def run(self):
-        while True:
-            new_command = raw_input()
-            incoming_commands.put(new_command)
-        #TODO needs a condition to break! mustnt outlive main.

@@ -3,6 +3,7 @@ import socket
 import threading
 import time
 import Queue
+from chessdev.data.data import *
 
 #import pdb; pdb.set_trace()
 
@@ -18,7 +19,7 @@ class CollectInput(threading.Thread):
         while True:
             if self.stopped():
                 break
-            text = raw_input('type here: ') 
+            text = raw_input() 
             input_queue.put(text)
         return True
 
@@ -28,20 +29,29 @@ class CollectInput(threading.Thread):
     def stopped(self):
         return self._stop.isSet()
 
-def main():
-    collect_incoming_data = CollectInput()
-    collect_incoming_data.start()
-    while True:
-        if not input_queue.empty():
-            text = input_queue.get()
-            if text == 'quit':
-                collect_incoming_data.stop()
-                break
-            print "You wrote: ", text, "\n"
-            input_queue.task_done()
-        time.sleep(0.1) 
-    collect_incoming_data.join()
-    
-if __name__ == '__main__':
-    main()
+class CecpWrapper():
+    """Implement the Chess Engine Communication Protocol (CECP)"""
+    def __init__(self):
+        pass
+        
+    def GetComands(self):
+        """Poll incoming_commands Queue and check if the command is known.
+        If unknown, write appropriate response to stdout
+        Returns List or None"""
+        
+        text = input_queue.get(True)
+        try:
+            words = text.split()        
+            if valid_move_input_obj.search(words[0]):
+                return words
+            elif words[0] in valid_commands:
+                return words
+            else:
+                print "Error (unknown command): ", text
+                return None
+        except IndexError:
+            print "Error (unknown command): ", text
+            return None
+                
+
     
