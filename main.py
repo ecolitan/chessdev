@@ -21,7 +21,6 @@ def main():
     while True:
         CecpWrapper().GetComands()
     #collect_incoming_data.stop()
-    #input_queue.task_done()
     #collect_incoming_data.join()
 
 num_runs = 100000

@@ -30,3 +30,12 @@ class DeadlyError(Error):
         
     def __str__(self):
         return repr(self.error, self.message)
+
+class MoveError(Error):
+    """Exception raised for errors in moves."""
+    
+    def __init__(self, move, message):
+        self.position = move
+        self.message = message
+    def __str__(self):
+        return repr(self.position, self.message)
