@@ -1,4 +1,6 @@
 import sys
+import os
+import ConfigParser
 from chessdev.data.data import *
 
 class GlobalState(object):
@@ -29,6 +31,11 @@ class GlobalState(object):
         self.always_display = None
         self.max_threads = None
         
-    def read_config_file(self):
+    def ParseConfig(self):
         """Update state from config_file"""
+        _f = open(default_config_file, 'r')
+        for i in _f.readlines():
+            print i
         pass
+        
+    

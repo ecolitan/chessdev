@@ -6,12 +6,13 @@ import time
 import Queue
 from test import *
 from chessdev.cecp import *
-import chessdev.globalstate
+from chessdev.globalstate import *
 
 def main():
     """main"""
     #Initialise global_state object
-    
+    global_state = GlobalState()
+    global_state.ParseConfig()
     
     #Incoming commands must be processed my main thread
     input_queue = Queue.Queue()    
