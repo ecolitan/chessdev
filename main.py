@@ -5,14 +5,16 @@ import profile
 import time
 import Queue
 from test import *
-from chessdev.socktest import *
+from chessdev.cecp import *
+import chessdev.globalstate
 
 def main():
     """main"""
+    #Initialise global_state object
+    
     
     #Incoming commands must be processed my main thread
-    incoming_commands = Queue.Queue()
-    
+    input_queue = Queue.Queue()    
     
     #some testing
     #quicktest()

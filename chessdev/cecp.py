@@ -7,8 +7,6 @@ from chessdev.data.data import *
 
 #import pdb; pdb.set_trace()
 
-input_queue = Queue.Queue()
-
 class CollectInput(threading.Thread):
     """Collect input from stdin."""
     def __init__(self):
