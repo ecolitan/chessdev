@@ -12,6 +12,9 @@ class CollectInput(threading.Thread):
     def __init__(self):
         super(CollectInput, self).__init__()
         self._stop = threading.Event()
+        global input_queue
+        input_queue = Queue.Queue()
+        
         
     def run(self):
         while True:
@@ -520,6 +523,10 @@ class CecpWrapper():
         VALUE will be sent at all.
         """
         pass
-        
+    
+    def Com_Help(self):
+        """This is not defined in the standard, but its nice to listen for help on stdin and print 
+        something usefull to the user."""
+        pass
         
     

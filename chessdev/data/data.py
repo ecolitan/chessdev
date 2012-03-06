@@ -97,7 +97,7 @@ valid_commands = ['xboard',
 valid_move_input = r"""([abcdefgh][1-8]){2}([qrbn])?"""
 valid_move_input_obj = re.compile(valid_move_input)
 
-default_config_file = './config'
+default_config_file = './chessdev.cfg'
 
 
 

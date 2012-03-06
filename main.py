@@ -15,7 +15,8 @@ def main():
     global_state.ParseConfig()
     
     #Incoming commands must be processed my main thread
-    input_queue = Queue.Queue()    
+    #input_queue = Queue.Queue()
+    #global input_queue
     
     #some testing
     #quicktest()

@@ -33,9 +33,8 @@ class GlobalState(object):
         
     def ParseConfig(self):
         """Update state from config_file"""
-        _f = open(default_config_file, 'r')
-        for i in _f.readlines():
-            print i
-        pass
+        config = ConfigParser.RawConfigParser()
+        config.read(default_config_file)
+        
         
     

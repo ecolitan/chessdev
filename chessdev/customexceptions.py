@@ -39,3 +39,12 @@ class MoveError(Error):
         self.message = message
     def __str__(self):
         return repr(self.position, self.message)
+        
+class ConfigError(Error):
+    """Errors in config and state"""
+    def __init__(self, error, message):
+        self.error = error
+        self.message = message
+        
+    def __str__(self):
+        return repr(self.error, self.message)
